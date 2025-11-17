@@ -1,0 +1,443 @@
+{
+  "bid_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+  "tender_id": "ecdec7ba-8194-4cec-af3c-78513c021d63",
+  "current_selected_criteria": "1",
+  "current_selected_bidder": "Shankar",
+  "current_pdf_page": 111,
+  "criterias": {
+    "1": {
+      "metadata": {
+        "tables": {
+          "table-1-Abhiraj": {
+            "cells": {
+              "turnover-2019-20": {
+                "value": "2343.24",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              },
+              "turnover-2020-21": {
+                "value": "5956.07",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              },
+              "turnover-2021-22": {
+                "value": "1165.00",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              },
+              "turnover-2022-23": {
+                "value": "3814.51",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              },
+              "turnover-2023-24": {
+                "value": "9084.83",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              }
+            }
+          },
+          "table-1-Shraddha": {
+            "cells": {
+              "turnover-2019-20": {
+                "value": "2343.24",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              },
+              "turnover-2020-21": {
+                "value": "5956.07",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              },
+              "turnover-2021-22": {
+                "value": "1165.00",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              },
+              "turnover-2022-23": {
+                "value": "3814.51",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              },
+              "turnover-2023-24": {
+                "value": "9084.83",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              }
+            }
+          },
+          "table-1-Shankar": {
+            "cells": {
+              "turnover-2019-20": {
+                "value": "2343.24",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              },
+              "turnover-2020-21": {
+                "value": "5956.07",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              },
+              "turnover-2021-22": {
+                "value": "1165.00",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              },
+              "turnover-2022-23": {
+                "value": "3814.51",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              },
+              "turnover-2023-24": {
+                "value": "9084.83",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "AI",
+                  "modified_at": "2025-11-16T20:22:50.770Z"
+                }
+              }
+            }
+          },
+          "table-1-J.V.": {
+            "cells": {
+              "multiplyingFactor-2019-20": {
+                "value": "1.50",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "user",
+                  "modified_at": "2025-11-16T20:53:01.989Z"
+                }
+              },
+              "multiplyingFactor-2020-21": {
+                "value": "1.40",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "user",
+                  "modified_at": "2025-11-16T20:53:01.989Z"
+                }
+              },
+              "multiplyingFactor-2021-22": {
+                "value": "1.30",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "user",
+                  "modified_at": "2025-11-16T20:53:01.989Z"
+                }
+              },
+              "multiplyingFactor-2022-23": {
+                "value": "1.20",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "user",
+                  "modified_at": "2025-11-16T20:53:01.989Z"
+                }
+              },
+              "multiplyingFactor-2023-24": {
+                "value": "1.10",
+                "page_number": 111,
+                "metadata": {
+                  "modified_by": "user",
+                  "modified_at": "2025-11-16T20:53:01.989Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "bookmarked_pages": [
+    {
+      "bookmark_id": "bm-1-Abhiraj-111",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Abhiraj",
+      "page_number": 111,
+      "created_at": "2025-11-17T03:07:39.404569Z"
+    },
+    {
+      "bookmark_id": "bm-1-J.V.-111",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "J.V.",
+      "page_number": 111,
+      "created_at": "2025-11-17T03:07:39.404591Z"
+    },
+    {
+      "bookmark_id": "bm-1-J.V.-336",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "J.V.",
+      "page_number": 336,
+      "created_at": "2025-11-17T03:07:39.404592Z"
+    },
+    {
+      "bookmark_id": "bm-1-J.V.-808",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "J.V.",
+      "page_number": 808,
+      "created_at": "2025-11-17T03:07:39.404593Z"
+    },
+    {
+      "bookmark_id": "bm-1-Shraddha-111",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Shraddha",
+      "page_number": 111,
+      "created_at": "2025-11-17T04:21:52.769Z"
+    },
+    {
+      "bookmark_id": "bm-1-Shankar-111",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Shankar",
+      "page_number": 111,
+      "created_at": "2025-11-17T04:21:53.733Z"
+    },
+    {
+      "bookmark_id": "bm-1-Shankar-235",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Shankar",
+      "page_number": 235,
+      "created_at": "2025-11-17T04:21:53.733Z"
+    },
+    {
+      "bookmark_id": "bm-1-Shankar-312",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Shankar",
+      "page_number": 312,
+      "created_at": "2025-11-17T04:21:53.733Z"
+    },
+    {
+      "bookmark_id": "bm-1-Shankar-325",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Shankar",
+      "page_number": 325,
+      "created_at": "2025-11-17T04:21:53.733Z"
+    },
+    {
+      "bookmark_id": "bm-1-Shankar-336",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Shankar",
+      "page_number": 336,
+      "created_at": "2025-11-17T04:21:53.733Z"
+    },
+    {
+      "bookmark_id": "bm-1-Shankar-351",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Shankar",
+      "page_number": 351,
+      "created_at": "2025-11-17T04:21:53.733Z"
+    },
+    {
+      "bookmark_id": "bm-1-Shankar-355",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Shankar",
+      "page_number": 355,
+      "created_at": "2025-11-17T04:21:53.733Z"
+    },
+    {
+      "bookmark_id": "bm-1-Shankar-401",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Shankar",
+      "page_number": 401,
+      "created_at": "2025-11-17T04:21:53.733Z"
+    },
+    {
+      "bookmark_id": "bm-1-Shankar-415",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Shankar",
+      "page_number": 415,
+      "created_at": "2025-11-17T04:21:53.733Z"
+    },
+    {
+      "bookmark_id": "bm-1-Shankar-612",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Shankar",
+      "page_number": 612,
+      "created_at": "2025-11-17T04:21:53.733Z"
+    },
+    {
+      "bookmark_id": "bm-1-Shankar-613",
+      "bid_evaluation_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+      "criteria_key": "1",
+      "bidder_name": "Shankar",
+      "page_number": 613,
+      "created_at": "2025-11-17T04:21:53.733Z"
+    }
+  ],
+  "chat_messages": [
+    {
+      "message_id": "user-1763326377292",
+      "role": "user",
+      "content": "Annual turnover for Abhiraj certified by CA",
+      "criteria_key": "1",
+      "bidder_name": "Abhiraj",
+      "created_at": "2025-11-16T20:52:57.292Z",
+      "searchResults": []
+    },
+    {
+      "message_id": "loading-1763326377292",
+      "role": "assistant",
+      "content": "Annual turnover for Abhiraj certified by CA.\n\nFound 10 relevant results from the bid document.",
+      "criteria_key": "1",
+      "bidder_name": "Abhiraj",
+      "created_at": "2025-11-16T20:52:57.292Z",
+      "searchResults": [
+        {
+          "document_id": "5eed0660-ec5e-4b0d-bec0-48f66480aaf3",
+          "bid_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+          "document_name": "Abhiraj and Shraddha J.V.",
+          "page_no": "110",
+          "content_types": "Handwriting,Table,Text,SectionHeader,Picture",
+          "content": "<p block-type=\"Text\">Office no.12 &amp; 14, Meher Arihant building, Opp Ayurved Rasashala, Karve Road, Pune - 411004. Ph: 020 4860 3010. Email: info@ykc.co.in, Web: ykc.co.in</p>\n<p><img src='/page/110/Picture/1'></p>\n<p block-type=\"Text\">CHARTERED ACCOUNTANTS</p>\n<h1>TO WHOMSOEVER IT MAY CONCERN</h1>\n<p block-type=\"Text\">This is to certify that Abhiraj Engicon Private Limited, having registered office at Mansi Apartment, Flat No. 101, Jagtap Dairy, Vishal Nagar, Pune-411027, has turnover from Civil Engineering Contracts for last 5 years as follows:</p>\n<table><tbody><tr><th><b>Financial Year</b></th><th>Turnover (Including GST)<br/>(Rs. In Lakhs)</th></tr><tr><td>2019-20</td><td>2,343.24</td></tr><tr><td>2020-21</td><td colspan=\"5\">5,956.07</td></tr><tr><td>2021-22</td><td colspan=\"5\">1,165.00</td></tr><tr><td>2022-23</td><td>3,814.51</td></tr><tr><td>2023-24</td><td colspan=\"4\">9,084.83</td></tr></tbody></table>\n<p block-type=\"Text\">This certificate is issued on the basis of Audited Balance Sheet of respective years.</p>\n<p block-type=\"Text\">Further, this certificate is issued on specific request from Mr. Nanasaheb I. Rachkar, Managing Director of Abhiraj Engicon Private Limited for Tender Purpose.</p>\n<h1>For YASHWANT KASAR &amp; CO.</h1>\n<p>Chartered Accountant. KA. FRN: 130360W M. No. 133627 CA Yashwant J. Kasar ed Ar Proprietor</p>\n<p block-type=\"Text\">M. No.: 133627 UDIN: 24133627BKESCP3581 Place: Pune Date: 09-10-2024</p>\n<p><img src='/page/110/Picture/11'></p>\n<p block-type=\"Text\"><math display=\"inline\">-111</math></p>",
+          "semantic_meaning": "**Page 110 ‚Äì [General Financial documents], [Annual Turnover]**\n\n* **Content Type**: Mixed (narrative text + table)\n* **Summary**:  \n  * Chartered Accountant Yashwant J. Kasar (CA Yashwant J. Kasar, FRN‚ÄØ130360W, M.No.‚ÄØ133627, UDIN‚ÄØ24133627BKESCP3581) of YASHWANT KASAR & CO., office No.‚ÄØ12 &‚ÄØ14, Meher Arihant Building, Pune‚Äë411004, certifies turnover of Abhiraj Engicon Pvt. Ltd. (registered office: Mansi Apartment, Flat‚ÄØ101, Jagtap Dairy, Vishal Nagar, Pune‚Äë411027).  \n  * Turnover figures (including GST, in ‚Çπlakhs) for Civil Engineering Contracts:  \n    * FY‚ÄØ2019‚Äë20:‚ÄØ2,343.24  \n    * FY‚ÄØ2020‚Äë21:‚ÄØ5,956.07  \n    * FY‚ÄØ2021‚Äë22:‚ÄØ1,165.00  \n    * FY‚ÄØ2022‚Äë23:‚ÄØ3,814.51  \n    * FY‚ÄØ2023‚Äë24:‚ÄØ9,084.83  \n  * Certificate issued based on audited balance sheets of the respective years; requested by Managing Director Mr. Nanasaheb I. Rachkar for tender purposes.  \n  * Contact details: phone‚ÄØ020‚ÄØ4860‚ÄØ3010, email‚ÄØinfo@ykc.co.in, web‚ÄØykc.co.in.  \n  * Document dated‚ÄØ09‚Äë10‚Äë2024.\n* **Continuity Note**: Page presents a standalone certification; no further substantive content follows.",
+          "similarity_score": 0.82956463
+        },
+        {
+          "document_id": "86c5f1eb-a527-4b7a-965f-4b1858aea06c",
+          "bid_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+          "document_name": "Abhiraj and Shraddha J.V.",
+          "page_no": "335",
+          "content_types": "Handwriting,Table,Text,SectionHeader,Picture",
+          "content": "<p><img src='/page/335/Picture/0'></p>\n<p><img src='/page/335/Picture/1'></p>\n\n\n<p block-type=\"Text\"></p>\n<table><tbody><tr><th>Sr. No.</th><th>Year</th><th><b>Annual Turnover</b><br/>(Rs. In Lakhs)</th><th>Remark</th></tr><tr><td></td><td>2023-24</td><td>7520.72</td><td>As per Unaudited books of accounts</td></tr><tr><td>. 11</td><td>2022-23</td><td>4025.35</td><td>As per Audited books of accounts</td></tr><tr><td>'III</td><td>2021-22</td><td>3491.45</td><td>As per Audited books of accounts</td></tr><tr><td>IV</td><td>2020-21</td><td>2668.86</td><td>As per Audited books of accounts</td></tr><tr><td>V</td><td>2019-20</td><td>3110.00</td><td>As per Audited books of accounts</td></tr></tbody></table>\n<p block-type=\"Text\"></p>\n<p><img src='/page/335/Picture/6'></p>\n<p></p>\n<p block-type=\"Text\"></p>\n<p block-type=\"Text\">Signature Not Verified</p>",
+          "semantic_meaning": "**Page 335 ‚Äì [Annual Turnover]**\n\n* **Content Type**: Table  \n* **Summary**:  \n  - **Annual Turnover (‚Çπ in Lakhs)**  \n    - 2023‚Äë24: 7,520.72 (Unaudited books)  \n    - 2022‚Äë23: 4,025.35 (Audited books)  \n    - 2021‚Äë22: 3,491.45 (Audited books)  \n    - 2020‚Äë21: 2,668.86 (Audited books)  \n    - 2019‚Äë20: 3,110.00 (Audited books)  \n  - **Remarks**: 2023‚Äë24 figure unaudited; prior years audited.   \n* **Continuity Note**: Page contains only the turnover table and a ‚ÄúSignature Not Verified‚Äù line; no continuation from prior or next pages.",
+          "similarity_score": 0.8689438
+        },
+        {
+          "document_id": "6706bfb9-6755-4e54-bb79-61128c29a289",
+          "bid_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+          "document_name": "Abhiraj and Shraddha J.V.",
+          "page_no": "234",
+          "content_types": "Handwriting,Table,Text,Picture,PageHeader",
+          "content": "<p block-type=\"Text\">15-10-2024/15:31</p>\n<p><img src='/page/234/Picture/1'></p>\n<p block-type=\"Text\">RAJ ENGICON PVT.</p>\n<p block-type=\"Text\">Flat No. 101, Mansi Apartment, Survey No. 24, Vishal Nagar, Near Jagtap Dairy, Pimple Nilakh, Pune - 411 027. Mob.: 9422503869 Email : abhiraj.pune@yahoo.com</p>\n<table><tbody><tr><th></th><th></th><th></th><th></th><th>Name of Bidder</th></tr><tr><th></th><th>ABHIRAJ ENGICON PVT LTD</th><th>Annual Turnover of the Contractor based on Certificates submitted to Income Tax<br/>Department / CA</th><th></th><th></th></tr><tr><th>Updated value<br/>(Rs. Lakhs)</th><th>Multiplying factor<br/>for updating</th><th>Annual turnover<br/>(In Rs. Lakhs)</th><th>Financial<br/>Year<br/>Ending</th><th>No. of year</th></tr><tr><td>3514.86</td><td>1.50</td><td>2343.24</td><td>2020</td><td>V</td></tr><tr><td>8338.50</td><td>1.40</td><td>5956.07</td><td>2021</td><td>IV</td></tr><tr><td>1514.50</td><td>1.30</td><td>1165.00</td><td>2022</td><td><math>\\text{III}</math></td></tr><tr><td>4577.41</td><td>1.20</td><td>3814.51</td><td>2023</td><td>H</td></tr><tr><td>9993.31</td><td>1.10</td><td>9084.83</td><td>2024</td><td>I</td></tr></tbody></table>\n<p block-type=\"Text\">Note - To be given separately by each partner in case of joint venture.</p>\n<p>ABHIRAJ ENGICON PRIVATE LIMITED ararabul MANAGING DIRECTOR</p>\n<p><img src='/page/234/Picture/7'></p>",
+          "semantic_meaning": "**Page 234 ‚Äì [Annual Turnover] [Basic Information]**\n\n* **Content Type**: Mixed (table + narrative)\n\n* **Summary**:  \n  - **Timestamp**: 15‚Äë10‚Äë2024 15:31.  \n  - **Company**: ABHIRAJ ENGICON PVT LTD (also listed as RAJ ENGICON PVT).  \n  - **Address**: Flat No.‚ÄØ101, Mansi Apartment, Survey No.‚ÄØ24, Vishal Nagar, Near Jagtap Dairy, Pimple Nilakh, Pune‚ÄØ-‚ÄØ411‚ÄØ027.  \n  - **Contact**: Mobile‚ÄØ942‚ÄØ250‚ÄØ3869, Email abhiraj.pune@yahoo.com.  \n  - **Annual Turnover (Proforma‚Äë4)** ‚Äì Calculated from updated values and multiplying factors (as per income‚Äëtax/CA certificates).  \n    | Financial Year (ending) | Updated Value (Rs.‚ÄØLakhs) | Multiplier | Annual Turnover (Rs.‚ÄØLakhs) |\n    |--------------------------|--------------------------|------------|---------------------------|\n    | 2020 (V) | 3,514.86 | 1.50 | 2,343.24 |\n    | 2021 (IV) | 8,338.50 | 1.40 | 5,956.07 |\n    | 2022 (III) | 1,514.50 | 1.30 | 1,165.00 |\n    | 2023 (H) | 4,577.41 | 1.20 | 3,814.51 |\n    | 2024 (I) | 9,993.31 | 1.10 | 9,084.83 |\n  - **Note**: Joint‚Äëventure partners must provide separate turnover data.  \n  - **Signature**: Image placeholder for Managing Director signature (Abhiraj Engicon Pvt. Ltd.).\n\n* **Continuity Note**: This page contains the turnover table and company contact details only; no continuation to the next page.",
+          "similarity_score": 0.9067016
+        },
+        {
+          "document_id": "ce5fd89c-74ac-4e0c-b92f-4b0a5629489e",
+          "bid_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+          "document_name": "Abhiraj and Shraddha J.V.",
+          "page_no": "243",
+          "content_types": "Handwriting,Table,Text,SectionHeader,Picture,PageHeader",
+          "content": "<p block-type=\"Text\">Office no.12 &amp; 14, Meher Arihant building, Opp Ayurved Rasashala, Karve Road, Pune - 411004. Ph: 020 4860 3010. Email: info@ykc.co.in, Web: ykc.co.in</p>\n<p><img src='/page/243/Picture/1'></p>\n<h1>CHARTERED ACCOUNTANTS</h1>\n<h1>TO WHOMSOEVER IT MAY CONCERN</h1>\n<p block-type=\"Text\">This is to certify that Abhiraj Engicon Private Limited, having registered office at Mansi Apartment, Flat No. 101, Jagtap Dairy, Vishal Nagar, Pune-411027, has turnover from Civil Engineering Contracts for last 5 years as follows:</p>\n<table><tbody><tr><th><b>Financial Year</b></th><th>Turnover (Including GST)<br/>(Rs. In Lakhs)</th></tr><tr><td>2019-20</td><td>2,343.24</td></tr><tr><td>2020-21</td><td>5,956.07</td></tr><tr><td>2021-22</td><td>1,165.00</td></tr><tr><td>2022-23</td><td>3,814.51</td></tr><tr><td>2023-24</td><td>9,084.83</td></tr></tbody></table>\n<p block-type=\"Text\">This certificate is issued on the basis of Audited Balance Sheet of respective years.</p>\n<p block-type=\"Text\">Further, this certificate is issued on specific request from Mr. Nanasaheb I. Rachkar, Managing Director of Abhiraj Engicon Private Limited for Tender Purpose.</p>\n<h1>For YASHWANT KASAR &amp; CO.</h1>\n<p>Chartered Accountant. KA FRN: 130360W M. No. 133627 CA Yashwant J. Kasar ed Ar Proprietor</p>\n<p block-type=\"Text\">M. No.: 133627 UDIN: 24133627BKESCP3581 Place: Pune Date: 09-10-2024</p>\n<p><img src='/page/243/Picture/11'></p>",
+          "semantic_meaning": "**Page 243 ‚Äì [Annual Turnover]**\n\n* **Content Type**: Mixed  \n* **Summary**: Chartered Accountant Yashwant J. Kasar (KA‚ÄØFRN‚ÄØ130360W, M‚ÄØNo‚ÄØ133627, CA, UDIN‚ÄØ24133627BKESCP3581) certifies that ABHIRAJ‚ÄØENGICON‚ÄØPRIVATE‚ÄØLIMITED, registered office Flat‚ÄØ101, Mansi‚ÄØApartment, Jagtap‚ÄØDairy, Vishal‚ÄØNagar, Pune‚Äë411027, achieved the following civil‚Äëengineering contract turnovers (incl. GST) over the last five financial years: FY2019‚Äë20‚ÄØ‚Çπ2,343.24‚ÄØL, FY2020‚Äë21‚ÄØ‚Çπ5,956.07‚ÄØL, FY2021‚Äë22‚ÄØ‚Çπ1,165.00‚ÄØL, FY2022‚Äë23‚ÄØ‚Çπ3,814.51‚ÄØL, FY2023‚Äë24‚ÄØ‚Çπ9,084.83‚ÄØL. The certificate, issued 09‚ÄëOct‚Äë2024, is based on audited balance sheets and was requested by Managing Director Nanasaheb‚ÄØI‚ÄØRachkar for tender purposes. The accountant‚Äôs office is located Office‚ÄØno.‚ÄØ12‚ÄØ&‚ÄØ14, Meher‚ÄØArihant‚ÄØBuilding, Karve‚ÄØRoad, Pune‚Äë411004 (Tel‚ÄØ020‚ÄØ4860‚ÄØ3010, Email‚ÄØinfo@ykc.co.in).  \n* **Continuity Note**: Stand‚Äëalone document.",
+          "similarity_score": 0.9547615
+        },
+        {
+          "document_id": "928aca3d-20d1-4e3d-8974-fd2297c7e8e6",
+          "bid_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+          "document_name": "Abhiraj and Shraddha J.V.",
+          "page_no": "612",
+          "content_types": "TextInlineMath,Handwriting,Table,Text,SectionHeader",
+          "content": "<h3>ISO 9001:2015, ISO 4500 <math display=\"inline\">018</math></h3>\n<p block-type=\"Text\">Ref. No .:</p>\n<p block-type=\"Text\">Main Road, Near Nagraj Mandir, PALUS. Tal. Palus, Dist. Sangli. Pin. 416310. (Maharashtra) Tel/Fax. (02346) 228201, 295714, E-mail : s_constructions@yahoo.com / shraddhaconst26@gmail.com.</p>\n<h1>Calculation of Bid capacity of the Bidder</h1>\n<table><tbody><tr><th></th><th>(Bidders Self declaration regarding Bid Capacity)</th><th></th><th></th><th></th></tr><tr><th colspan=\"9\"><math display=\"block\">Bid Capacity = (A x N x 2) - B</math></th></tr><tr><th></th><th>A= Maximum value of Annual Turnover in any one year<br/>during the period of last five years, i.e. 2019-20 to 2023<br/>24 (updated to the price level, of 2024-2025) which will<br/>take into account.</th><th></th><th></th><th></th></tr><tr><td></td><td>Contractor must submit Chartered Accountant's<br/>certificate supported by audited balance sheet showing<br/>turn-over of last five years.(CA must having Unique<br/>Document Identification Number (UDIN))</td><td>(A)</td><td>8272.79</td><td>In Lakhs</td></tr><tr><td></td><td>The submission of information above is obligatory. In<br/>case of non-submission, it shall be concluded that<br/>contractor does not have adequate Bid Capacity and<br/>shall not be considered for Post Qualification.</td><td></td><td></td><td></td></tr><tr><td>2</td><td>N= Number of years prescribed for completion of the<br/>works for which bid is invited.</td><td>(N)</td><td>(24 Months)</td><td>Nos</td></tr><tr><td>. 3.</td><td><math>B =</math> Value of existing commitments and on- going<br/>works (updated up to price level of the year in which<br/>tenders are opened)</td><td>(B)</td><td>21785.46</td><td>In Lakhs</td></tr><tr><td>4</td><td><b>Bid Capacity</b></td><td></td><td>11305.70</td><td>In Lakhs</td></tr></tbody></table>\n<h1><math display=\"inline\">Bid Capacity = (A \\times N \\times 2) - B</math></h1>\n<p block-type=\"Text\">Signature Not Verified</p>\n<p block-type=\"Text\">Digitally signed by NANASAHEE</p>\n<p block-type=\"TextInlineMath\"><math display=\"inline\">=(8272.79 \\times 2 \\times 2) - 21785.46</math></p>\n<p block-type=\"TextInlineMath\"><math display=\"inline\">= 33091.16 - 21785.46</math></p>\n<p block-type=\"TextInlineMath\">Bid Capacity = 11305.70 Lakhs</p>\n<p block-type=\"Text\">For, M/s. Shraddha Construcitons</p>\n<p block-type=\"Text\">SHRADDH</p>\n<p block-type=\"Text\">Date:</p>\n<p block-type=\"Text\">CONSTRUCTIONS</p>\n<p>Partner</p>",
+          "semantic_meaning": "**Page 612 ‚Äì [General Financial documents][Annual Turnover]**\n\n* **Content Type**: Mixed (narrative + table)  \n* **Summary**:  \n  * **Company**: M/S Shraddha Constructions, Palus Tal. Palus, Dist. Sangli, Maharashtra, Pin¬†416310.  \n  * **Contact**: Tel/Fax¬†(02346)¬†228201, 295714; e‚Äëmail¬†s_constructions@yahoo.com / shraddhaconst26@gmail.com.  \n  * **Certifications**: ISO¬†9001:2015, ISO¬†4500¬†018.  \n  * **Bid Capacity Self‚ÄëDeclaration**:  \n    * **A** (maximum Annual Turnover in any one of last five years, 2019‚Äë20 to 2023‚Äë24): ‚Çπ¬†8‚ÄØ272.79‚ÄØlakhs (CA‚Äëcertified, UDIN required).  \n    * **N** (number of contracted work years): 24‚ÄØmonths.  \n    * **B** (value of existing commitments & ongoing works, price‚Äëlevel updated 2024‚Äë25): ‚Çπ¬†21‚ÄØ785.46‚ÄØlakhs.  \n    * **Bid Capacity Calculation**: (A‚ÄØ√ó‚ÄØN‚ÄØ√ó‚ÄØ2)¬†‚Äì¬†B = (8‚ÄØ272.79‚ÄØ√ó‚ÄØ2‚ÄØ√ó‚ÄØ2)¬†‚Äì¬†21‚ÄØ785.46¬†=¬†11‚ÄØ305.70‚ÄØlakhs.  \n  * **Signature**: Digital signature log by NANASAHEB‚ÄØISHWARA‚ÄØRACHKAR; status ‚ÄúSignature Not Verified‚Äù.  \n* **Continuity Note**: Follows Page‚ÄØ610‚Äôs turnover figures; this page completes the bid capacity declaration and ends the documentation sequence.",
+          "similarity_score": 0.9822165
+        },
+        {
+          "document_id": "fd5fb29b-8ddb-491d-a9dc-4f297171387e",
+          "bid_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+          "document_name": "Abhiraj and Shraddha J.V.",
+          "page_no": "140",
+          "content_types": "Handwriting,Table,Text,SectionHeader,PageHeader",
+          "content": "<p block-type=\"Text\"></p>\n<table><tbody><tr><th></th><th></th><th></th><th></th><th>(Rs. Hundred's)</th></tr><tr><th></th><th>Statement of Profit and Loss</th><th>Sch</th><th>As at<br/>Mar 31, 2023</th><th>As at<br/>Mar 31, 2022</th></tr><tr><th>Income</th><th></th><th>dille d</th><th></th><th></th></tr><tr><th>a</th><th>Income from Operations</th><th>2.16</th><th>33,23,446</th><th>10,89,413</th></tr><tr><td>b</td><td>Other Income</td><td>2.17</td><td>99,669</td><td>46,157</td></tr><tr><td></td><td>Total Income</td><td></td><td>34,23,115</td><td>11,35,570</td></tr><tr><td>Expenditure</td><td></td><td></td><td></td><td></td></tr><tr><td>a</td><td>Cost of Raw Material Consumed</td><td>2.18</td><td>20,01,898</td><td>10,09,104</td></tr><tr><td>b</td><td>Increase/ Decrease in Work-In-Progress</td><td>2.19</td><td>4,92,000</td><td>8,53,000</td></tr><tr><td>C</td><td><b>Employee Benefit Expenses</b></td><td>2.20</td><td>2,78,075</td><td>36,564</td></tr><tr><td>d</td><td>Operating, Office and Administration Expenses</td><td>2.21</td><td>10,78,528</td><td>6,75,866</td></tr><tr><td>e</td><td>Finance Cost</td><td>2.22</td><td>1,52,594</td><td>1,14,333</td></tr><tr><td>f</td><td>Depreciation and Amortisation</td><td>2.10</td><td>76,273</td><td>63,079</td></tr><tr><td></td><td><b>Total Expenses</b></td><td></td><td>30,95,368</td><td>10,45,945</td></tr><tr><td></td><td><b>Profit Before Tax</b></td><td></td><td>3,27,747</td><td>89,625</td></tr><tr><td></td><td>Tax Expense</td><td></td><td></td><td></td></tr><tr><td>a</td><td><b>Current Tax</b></td><td></td><td>58,533</td><td>16,849</td></tr><tr><td>b</td><td>Deferred Tax</td><td>2.5</td><td></td><td>(11,576)</td></tr><tr><td></td><td>Sub-total</td><td></td><td>58,533</td><td>5,273</td></tr><tr><td></td><td><b>Profit for the Period</b></td><td></td><td>2,69,214</td><td>84,352</td></tr><tr><td></td><td><b>Earning Per Equity Share</b></td><td></td><td></td><td></td></tr><tr><td></td><td>Equity share of par value of Rs. 10 Each<br/>Basic and Diluted (Adjusted)</td><td></td><td>17.95</td><td>5.62</td></tr><tr><td></td><td>Number of Share used in computing earning per share</td><td></td><td></td><td></td></tr><tr><td></td><td>Basic and Diluted (Adjusted)</td><td></td><td>15,00,000</td><td>15,00,000</td></tr><tr><td></td><td>Significant Accounting Policies</td><td>2.1</td><td></td><td></td></tr></tbody></table>\n<p block-type=\"Text\"></p>\n<p>Digitally signed by NANASAHEB ISHWARA RACHKAR Date: 19.10.2024 +05:30 Signature Not Verified</p>",
+          "semantic_meaning": "**Page 140 ‚Äì [Annual Turnover] [General Financial documents]**\n\n* **Content Type**: Table  \n* **Summary**:  \n  * **Company**: ABHIRAJ ENGICON PRIVATE LIMITED (PAN‚ÄØAAGCA3156J) ‚Äì 7‚ÄëPrivate company, Pune.  \n  * **Statement of Profit & Loss** (A.Y. 2023‚Äë24 vs 2022‚Äë23, figures in ‚Çπ100s)  \n    * **Income**  \n      * Income from Operations: ‚Çπ33,23,446 (2023) vs ‚Çπ10,89,413 (2022)  \n      * Other Income: ‚Çπ99,669 vs ‚Çπ46,157  \n      * **Total Income**: ‚Çπ34,23,115 vs ‚Çπ11,35,570  \n    * **Expenditure**  \n      * Cost of Raw Material Consumed: ‚Çπ20,01,898 vs ‚Çπ10,09,104  \n      * Increase/Decrease in Work‚ÄëIn‚ÄëProgress: ‚Çπ4,92,000 vs ‚Çπ8,53,000  \n      * Employee Benefit Expenses: ‚Çπ2,78,075 vs ‚Çπ36,564  \n      * Operating, Office & Administration: ‚Çπ10,78,528 vs ‚Çπ6,75,866  \n      * Finance Cost: ‚Çπ1,52,594 vs ‚Çπ1,14,333  \n      * Depreciation & Amortisation: ‚Çπ76,273 vs ‚Çπ63,079  \n      * **Total Expenses**: ‚Çπ30,95,368 vs ‚Çπ10,45,945  \n    * **Profit before Tax**: ‚Çπ3,27,747 vs ‚Çπ89,625  \n    * **Tax Expense**  \n      * Current Tax: ‚Çπ58,533 vs ‚Çπ16,849  \n      * Deferred Tax: ‚Çπ0 vs (‚Çπ11,576)  \n      * **Sub‚Äëtotal**: ‚Çπ58,533 vs ‚Çπ5,273  \n    * **Profit for the Period**: ‚Çπ2,69,214 vs ‚Çπ84,352  \n    * **Earnings per Equity Share (par‚ÄØ‚Çπ10)**  \n      * Basic & Diluted (Adjusted): ‚Çπ17.95 vs ‚Çπ5.62 (15‚ÄØL shares)  \n  * **Signatory**: Digitally signed by NANASAHEB ISHWARA RACHKAR on 19‚ÄØOct‚ÄØ2024 (+05:30).  \n\n* **Continuity Note**: Page is self‚Äëcontained; no continuation to subsequent pages.",
+          "similarity_score": 1.0368419
+        },
+        {
+          "document_id": "25bc41fc-a93e-42a2-b5aa-981af704170a",
+          "bid_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+          "document_name": "Abhiraj and Shraddha J.V.",
+          "page_no": "601",
+          "content_types": "SectionHeader,Text,Handwriting,Table",
+          "content": "<p block-type=\"Text\"></p>\n<p block-type=\"Text\"></p>\n\n<p block-type=\"Text\"></p>\n<p block-type=\"Text\"></p>\n<table><tbody><tr><th>Number of<br/>Year</th><th><b>Financial Year</b><br/>Ending March</th><th>Annual Turnover<br/>(Rs.In Lakhs)</th><th>Multiplying factors<br/>for updating</th><th>Updated Value<br/>(Rs. In Lakhs)</th></tr><tr><th>1</th><th>2</th><th><math>\\mathbf{4}</math></th><th>5</th><th>6</th></tr><tr><td>IV</td><td>2019-20</td><td>3110.00</td><td>1.50<br/>159</td><td>4665.00</td></tr><tr><td>111</td><td>2020-21<br/>W.</td><td>2668.86</td><td>1.40</td><td>3736.40</td></tr><tr><td>11</td><td>T√≠.<br/>2021-22</td><td>3491.45</td><td>1.30</td><td>4538.89</td></tr><tr><td></td><td>2022-23</td><td>4025.35<br/>42</td><td>1.20</td><td>4830.42</td></tr><tr><td></td><td>2023.24</td><td><math>\\tilde{M}</math><br/>7520.72</td><td>57<br/>1.10</td><td>8272.79</td></tr></tbody></table>\n<p block-type=\"Text\"></p>\n<p block-type=\"Text\"></p>\n<p></p>\n<h1>Signature Not Verified</h1>\n<p block-type=\"Text\">Digitally signed by NANASAHEB ISHWARA RACHKAR Date: 19.10.2024 +05:30</p>",
+          "semantic_meaning": "**Page 601 ‚Äì [Annual Turnover]**\n\n* **Content Type**: Table  \n* **Summary**: Updated annual turnover figures for the financial years ending March, with applied multiplying factors.  \n  * **Financial Year 2019‚Äë20**: Turnover ‚Çπ3,110.00‚ÄØlakh ‚Üí Multiplier 1.50,161 ‚Üí Updated ‚Çπ4,665.00‚ÄØlakh.  \n  * **Financial Year 2020‚Äë21**: Turnover ‚Çπ2,668.86‚ÄØlakh ‚Üí Multiplier 1.40 ‚Üí Updated ‚Çπ3,736.40‚ÄØlakh.  \n  * **Financial Year 2021‚Äë22**: Turnover ‚Çπ3,491.45‚ÄØlakh ‚Üí Multiplier 1.30 ‚Üí Updated ‚Çπ4,538.89‚ÄØlakh.  \n  * **Financial Year 2022‚Äë23**: Turnover ‚Çπ4,025.35‚ÄØlakh ‚Üí Multiplier 1.20 ‚Üí Updated ‚Çπ4,830.42‚ÄØlakh.  \n  * **Financial Year 2023‚Äë24**: Turnover ‚Çπ7,520.72‚ÄØlakh ‚Üí Multiplier 1.10 ‚Üí Updated ‚Çπ8,272.79‚ÄØlakh.  \n  * **Signature**: ‚ÄúSignature Not Verified.‚Äù Digitally signed by **NANASAHEB ISHWARA RACHKAR** on **19‚ÄØOct‚ÄØ2024** (+05:30).  \n* **Continuity Note**: Continuation of the turnover update table summarized on page‚ÄØ600; no further pages continue beyond this.",
+          "similarity_score": 1.1443996
+        },
+        {
+          "document_id": "45bd14c2-d999-4435-bf5e-fd9917ac3c80",
+          "bid_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+          "document_name": "Abhiraj and Shraddha J.V.",
+          "page_no": "126",
+          "content_types": "SectionHeader,PageHeader,Table",
+          "content": "<table><tbody><tr><th></th><th></th><th></th><th>127</th><th></th><th></th></tr><tr><th></th><th></th><th></th><th></th><th></th><th></th></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Signature Not Verified</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>Digitally signed by NANASAHEB ISHWARA RACHKAR</td><td></td><td></td><td></td><td></td></tr><tr><td>Date: 19.10.2024 +05:30</td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>",
+          "semantic_meaning": "**Page 126 ‚Äì [General Financial documents]**\n\n* **Content Type**: Table  \n* **Summary**: Final signature block of the FY‚ÄØ2021‚Äë22 Annual Tax Statement for **Abhiraj Engicon Private Limited** (PAN‚ÄØAAGCA3156J). Signature status: *‚ÄúSignature Not Verified.‚Äù* Digitally signed by **Nanasaheb Ishwara Rachkar** on **19‚ÄØOctober‚ÄØ2024** (UTC‚ÄØ+05:30). No additional fiscal or explanatory content present.  \n* **Continuity Note**: Concluding page; no subsequent substantive content.",
+          "similarity_score": 1.1652452
+        },
+        {
+          "document_id": "a23e30b2-29a3-42e6-b848-f8c8964f0e9d",
+          "bid_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+          "document_name": "Abhiraj and Shraddha J.V.",
+          "page_no": "125",
+          "content_types": "SectionHeader,PageHeader,Table",
+          "content": "<table><tbody><tr><th></th><th></th><th></th><th></th><th></th><th></th></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>Signature Not Verified</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td>Digitally signed by NANASAHEB ISHWARA RACHKAR</td><td></td><td></td><td></td></tr><tr><td>Date: 19.10.2024 +05:30</td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>",
+          "semantic_meaning": "**Page 125 ‚Äì [General Financial documents]**\n\n* **Content Type**: Table  \n* **Summary**: Final signature block for the Annual Tax Statement FY‚ÄØ2021‚Äë22 of **Abhiraj Engicon Private Limited** (PAN‚ÄØAAGCA3156J). Digitally signed by **Nanasaheb Ishwara Rachkar**. Signature status: ‚ÄúSignature Not Verified‚Äù ‚Äì no physical verification logged. Signing date: **19‚ÄØOctober‚ÄØ2024** (UTC+05:30).  \n* **Continuity Note**: This is the concluding page of the document; no subsequent substantive content follows.",
+          "similarity_score": 1.1679354
+        },
+        {
+          "document_id": "e7af70d7-211d-46a1-9e13-1fcc636dedc9",
+          "bid_id": "095de00e-f8f4-40b5-9456-6854bd84608e",
+          "document_name": "Abhiraj and Shraddha J.V.",
+          "page_no": "35",
+          "content_types": "TextInlineMath,Handwriting,Table,Text,SectionHeader,PageHeader",
+          "content": "<p block-type=\"Text\">36</p>\n<h1>Flat No.101, Mansi Apartment, Survey No.24, Vishal Nagar, Near Jagtap Dairy, Pimple Nilakh, Pune - 411 027 (Maharashtra).</h1>\n<p block-type=\"Text\">E-Mail: abhirajpune@yahoo.com, Mob. 9422503869.</p>\n<h1>Ref. No .:</h1>\n<p block-type=\"Text\">Date:</p>\n<table><tbody><tr><th></th><th>(Bidders Self declaration regarding Bid Capacity)</th><th></th><th></th><th></th></tr><tr><th></th><th><math display=\"block\">Bid Capacity = (A \\times N \\times 2) - B</math></th><th></th><th></th><th></th></tr><tr><th></th><th>A= Maximum value of annual turnover in any one year during the<br/>period of last five years Value Declared in Format 4/1 A or 4/1 B</th><th>(A)</th><th>20026.11</th><th>In Lakhs</th></tr><tr><td></td><td>N= Time period of tender in years</td><td>(N)</td><td>(24 Months)</td><td>Nos</td></tr><tr><td>3</td><td><math>B =</math> value of existing commitments and ongoing works to be<br/>completed in the period stipulated for completion of the work<br/>Value Declared in Format 4/2 (For work period)<br/>1.Abhiraj Engicon Pvt.Ltd. - Rs.- 15740.40 Lakhs<br/>2.M/s. Shraddha.Constructions - Rs.21785.48 Lakhs<br/>3.Shankar Sambhaji Jadhav - Rs.948.60 Lakhs</td><td>(B)</td><td>38474.48</td><td>In Lakhs</td></tr><tr><td>4</td><td><math display=\"block\">Bid Capacity = (A x N x 2) - B</math></td><td></td><td>41629.96</td><td>In Lakhs</td></tr></tbody></table>\n<p block-type=\"Text\"><math display=\"inline\">Bid Capacity = (A \\times N \\times 2) - B</math></p>\n<p block-type=\"Text\"><math display=\"inline\">= (20026.11 \\times 2 \\times 2) - 38474.48</math></p>\n<p block-type=\"TextInlineMath\">- = 80104.44 - 38474.48</p>\n<p block-type=\"Text\">Bid Capacity = 41629.96 Lakhs</p>\n<p block-type=\"Text\">Signature Not Verified</p>\n<p block-type=\"Text\">Digitally signed by NANASAHEE</p>\n<p block-type=\"Text\">ASHIRAJ SHRADDHA (JV)</p>\n<p></p>\n<p block-type=\"Text\">uthorised Signator</p>",
+          "semantic_meaning": "**Page 35 ‚Äì [General Financial documents][Annual Turnover]**\n\n* **Content Type**: Mixed (narrative <‚Üí> table + formula)\n* **Summary**:  \n  * **Bidder**: Abhiraj‚ÄØShraddha (JV). Address: Flat‚ÄØ101, Mansi Apartment, Survey‚ÄØ24, Vishal‚ÄØNagar, Near Jagtap‚ÄØDairy, Pimple‚ÄØNilakh, Pune‚ÄØ411027, Maharashtra. Contact: abhirajpune@yahoo.com / 9422503869.  \n  * **Document**: Self‚Äëdeclaration on Bid Capacity (sheet 6 supplementary).  \n  * **Calculation**:  \n    * A = maximum annual turnover in any year (last‚ÄØ5‚ÄØyrs) = ‚Çπ20,026.11‚ÄØlakhs (format‚ÄØ4/1‚ÄØA).  \n    * N = tender duration = 24‚ÄØmonths (2‚ÄØyears).  \n    * B = total value of existing commitments/ongoing works earmarked during work period:  \n      * Abhiraj‚ÄØEngicon‚ÄØPvt‚ÄØLtd. ‚Äì ‚Çπ15,740.40‚ÄØlakhs  \n      * M/s.‚ÄØShraddha‚ÄØConstructions ‚Äì ‚Çπ21,785.48‚ÄØlakhs  \n      * Shankar‚ÄØSambhaji‚ÄØJadhav ‚Äì ‚Çπ948.60‚ÄØlakhs  \n      * **Total B** = ‚Çπ38,474.48‚ÄØlakhs (format‚ÄØ4/2).  \n    * Bid Capacity = (A‚ÄØ√ó‚ÄØN‚ÄØ√ó‚ÄØ2)‚ÄØ‚Äì‚ÄØB  \n      = (20,026.11‚ÄØ√ó‚ÄØ2‚ÄØ√ó‚ÄØ2)‚ÄØ‚Äì‚ÄØ38,474.48 = 41,629.96‚ÄØlakhs.    \n  * **Verification Status**: Signature ‚ÄúNot Verified‚Äù; digitally signed by NANASAHEE on 19‚ÄëOct‚Äë2024 +05:30.  \n  * **Key Entities**: Abhiraj‚ÄØShraddha‚ÄØ(JV), Abhiraj‚ÄØEngicon‚ÄØPvt‚ÄØLtd., Shraddha‚ÄØConstructions, Shankar‚ÄØSambhaji‚ÄØJadhav, Bid Capacity, Annual Turnover, N, B, 20,026.11‚ÄØlakhs, 41,629.96‚ÄØlakhs.  \n* **Continuity Note**: Page 35 concludes the self‚Äëdeclaration; no content carried to subsequent pages.",
+          "similarity_score": 1.1732059
+        }
+      ]
+    }
+  ],
+  "updated_at": "2025-11-17T04:21:53.738Z"
+}

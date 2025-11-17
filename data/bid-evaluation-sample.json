@@ -1,0 +1,73 @@
+{
+  "bid_evaluation_id": "eval-001",
+  "bid_id": "bid-001",
+  "tender_id": "tender-001",
+  "created_at": "2024-01-15T10:00:00Z",
+  "updated_at": "2024-01-15T14:30:00Z",
+  "created_by": "user-001",
+  "current_view_mode": "validate",
+  "current_selected_criteria": "1",
+  "current_selected_bidder": "Abhiraj",
+  "current_pdf_page": 5,
+  "validations": [
+    {
+      "validation_id": "val-001",
+      "bid_evaluation_id": "eval-001",
+      "criteria_key": "1",
+      "bidder_name": "Abhiraj",
+      "cell_data": {
+        "turnover-2020-21": {
+          "value": "333.9",
+          "page_number": 5,
+          "is_approved": false
+        },
+        "turnover-2021-22": {
+          "value": "332.3",
+          "page_number": 5,
+          "is_approved": false
+        },
+        "turnover-2022-23": {
+          "value": "334.3",
+          "page_number": 5,
+          "is_approved": false
+        },
+        "turnover-2023-24": {
+          "value": "445.5",
+          "page_number": 5,
+          "is_approved": false
+        },
+        "turnover-2024-25": {
+          "value": "324.4",
+          "page_number": 5,
+          "is_approved": false
+        }
+      },
+      "approved_rows": [],
+      "validation_status": "in_progress"
+    }
+  ],
+  "evaluations": [],
+  "bookmarked_pages": [
+    {
+      "bookmark_id": "bm-001",
+      "bid_evaluation_id": "eval-001",
+      "criteria_key": "1",
+      "page_number": 5,
+      "created_at": "2024-01-15T10:15:00Z"
+    }
+  ],
+  "chat_messages": [
+    {
+      "message_id": "msg-001",
+      "role": "assistant",
+      "content": "Selected criteria is 5 year annual turnover.\n- document found on page 5 is submitted by bidder which I have done OCR of. please check and Approve it as it is an OCR.",
+      "criteria_key": "1",
+      "created_at": "2024-01-15T10:00:00Z"
+    }
+  ]
+}
+
+
+
+
+

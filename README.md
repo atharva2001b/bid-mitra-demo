@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bid Mitra - Bid Management System
+
+A modern bid management system built with Next.js and Shadcn UI for managing tenders, bids, and vendor evaluations.
+
+## Features
+
+- **Dashboard**: Overview of tenders, bids, and key metrics
+- **Tenders Management**: View and manage tender details
+- **Bids Management**: Track and evaluate bids for tenders
+- **Tasks**: Task management with filtering and status tracking
+- **Vendors**: Vendor management and queries
+- **Reports**: Analytics and reporting
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **UI Library**: Shadcn UI
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **TypeScript**: Full type safety
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+├── dashboard/          # Dashboard page
+├── tenders/           # Tenders list and detail pages
+├── bids/              # Bids list and detail pages
+├── tasks/             # Tasks management page
+├── vendors/           # Vendors page
+├── reports/           # Reports page
+└── layout.tsx         # Root layout
 
-## Learn More
+components/
+├── app-sidebar.tsx    # Main sidebar navigation
+├── app-layout.tsx     # App layout wrapper
+└── ui/                # Shadcn UI components
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Pages
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `/dashboard` - Main dashboard with overview cards
+- `/tenders` - List of all tenders
+- `/tenders/[id]` - Tender details with summary and bids list
+- `/bids` - List of all bids
+- `/bids/[id]` - Bid details with AI evaluation
+- `/tasks` - Task management
+- `/vendors` - Vendor management
+- `/reports` - Reports and analytics
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Building for Production
 
-## Deploy on Vercel
+```bash
+npm run build
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Theme
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The application uses a blue primary color scheme with light backgrounds, matching the design specifications from the provided images.
