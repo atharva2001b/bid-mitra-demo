@@ -57,8 +57,33 @@ export default function DashboardPage() {
   }
 
   // Calculate statistics
-  const totalTenders = tenders.length
-  const totalBids = bids.length
+  // Helper function to check if a bid is evaluated
+  const isBidEvaluated = (bidId: string): boolean => {
+    const bid = bids.find(b => b.bid_id === bidId)
+    if (!bid) return false
+    try {
+      const result = JSON.parse(bid.result || "{}")
+      return result && Object.keys(result).length > 0
+    } catch {
+      return false
+    }
+  }
+
+  // CLOSED TENDERS: Tenders that have bids AND all bids are evaluated (none pending)
+  const closedTenders = tenders.filter(t => {
+    const bidIds = JSON.parse(t.bid_ids || "[]")
+    if (bidIds.length === 0) return false // No bids = not closed
+    // All bids must be evaluated for tender to be closed
+    return bidIds.every((bidId: string) => isBidEvaluated(bidId))
+  }).length
+
+  // ACTIVE TENDERS: Tenders that have no bids OR have at least one pending bid
+  const activeTenders = tenders.filter(t => {
+    const bidIds = JSON.parse(t.bid_ids || "[]")
+    if (bidIds.length === 0) return true // No bids = active
+    // If any bid is pending, tender is active
+    return bidIds.some((bidId: string) => !isBidEvaluated(bidId))
+  }).length
   
   const evaluatedBids = bids.filter(bid => {
     try {
@@ -153,22 +178,22 @@ export default function DashboardPage() {
         <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-slate-500">TOTAL TENDERS</CardTitle>
+              <CardTitle className="text-sm font-medium text-slate-500">CLOSED TENDERS</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-semibold tracking-tight text-slate-900">
-                {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : totalTenders}
+                {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : closedTenders}
               </div>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-slate-500">TOTAL BIDS</CardTitle>
+              <CardTitle className="text-sm font-medium text-slate-500">ACTIVE TENDERS</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-semibold tracking-tight text-slate-900">
-                {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : totalBids}
+                {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : activeTenders}
               </div>
             </CardContent>
           </Card>
@@ -201,11 +226,11 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-slate-500">NEW TENDERS</CardTitle>
+                <CardTitle className="text-sm font-medium text-slate-500">OPEN TENDERS</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-semibold tracking-tight text-slate-900">
-                  {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : newTenders +1}
+                  {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : activeTenders}
                 </div>
               </CardContent>
             </Card>

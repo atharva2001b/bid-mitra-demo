@@ -27,7 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Edit, RefreshCw, MessageSquare, Info, ArrowDown, Upload, Loader2, Plus, Trash2, Save, X, FileText, Eye, BookOpen, Sparkles, ChevronUp, ChevronDown, PlayCircle } from "lucide-react"
+import { Edit, RefreshCw, MessageSquare, Info, ArrowDown, ArrowRight, Upload, Loader2, Plus, Trash2, Save, X, FileText, Eye, BookOpen, Sparkles, ChevronUp, ChevronDown, PlayCircle, CheckCircle } from "lucide-react"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
@@ -78,10 +78,12 @@ export default function TenderDetailPage() {
   const bidIdsString = JSON.stringify(bidIds) // Create stable string for comparison
   const evaluationCriteria = tender ? JSON.parse(tender.evaluation_criteria_json || "{}") : {}
   const hasBids = bidIds.length > 0
-  const hasCriteria = Object.keys(evaluationCriteria).length > 0
+  // Check if criteria has meaningful data (not just empty structure)
+  const hasCriteria = Object.keys(evaluationCriteria).length > 0 && 
+    Object.values(evaluationCriteria).some((c: any) => c?.title && c.title.trim() !== "")
 
-  // State for editing criteria
-  const [editingCriteria, setEditingCriteria] = useState<Record<string, { title: string; value: string; description?: string; subPoints?: Record<string, { title: string; value: string; description?: string }> }>>(evaluationCriteria)
+  // State for editing criteria - initialize empty, will be set in useEffect
+  const [editingCriteria, setEditingCriteria] = useState<Record<string, { title: string; value: string; requirement?: string; description?: string; subPoints?: Record<string, { title: string; value: string; requirement?: string; description?: string }> }>>({})
   const [isEditing, setIsEditing] = useState(false)
   const [saving, setSaving] = useState(false)
   const [viewMode, setViewMode] = useState<"table" | "edit">("table")
@@ -91,6 +93,9 @@ export default function TenderDetailPage() {
   const [bidName, setBidName] = useState("")
   const [bidPdfFile, setBidPdfFile] = useState<File | null>(null)
   const [bidCsvFile, setBidCsvFile] = useState<File | null>(null)
+  
+  // State for tab control
+  const [activeTab, setActiveTab] = useState("summary")
   const [uploadingBid, setUploadingBid] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
 
@@ -113,11 +118,192 @@ export default function TenderDetailPage() {
   // Update editing criteria when tender data changes
   useEffect(() => {
     if (tender) {
-      const criteria = JSON.parse(tender.evaluation_criteria_json || "{}")
-      setEditingCriteria(criteria)
+      let criteria: any = {}
+      try {
+        const criteriaStr = tender.evaluation_criteria_json || "{}"
+        criteria = JSON.parse(criteriaStr)
+      } catch (e) {
+        console.error("Error parsing evaluation criteria:", e)
+        criteria = {}
+      }
+      
+      // Check if criteria is empty or has no meaningful data
+      const hasValidCriteria = Object.keys(criteria).length > 0 && 
+        Object.values(criteria).some((c: any) => c?.title && typeof c.title === "string" && c.title.trim() !== "")
+      
+      // Check if criteria needs migration (missing requirement fields or wrong sub-point keys)
+      const needsMigration = hasValidCriteria && (
+        Object.values(criteria).some((c: any) => !c.hasOwnProperty("requirement")) ||
+        Object.values(criteria).some((c: any) => {
+          if (c.subPoints) {
+            return Object.keys(c.subPoints).some(key => !key.includes("."))
+          }
+          return false
+        })
+      )
+      
+      console.log("📋 Evaluation criteria check:", {
+        hasKeys: Object.keys(criteria).length > 0,
+        hasValidCriteria,
+        needsMigration,
+        criteria
+      })
+      
+      // Default criteria structure
+      const defaultCriteria = {
+        "1": {
+          title: "Annual Turnover (updated to current year)",
+          value: "Rs lakhs",
+          requirement: "3106.13",
+          description: ""
+        },
+        "2": {
+          title: "Bid Capacity = ( AxNx2) – B",
+          value: "Rs lakhs",
+          requirement: "8283.00",
+          description: ""
+        },
+        "3": {
+          title: "Completed Similar type of work",
+          value: "Rs lakhs",
+          requirement: "2484.90",
+          description: ""
+        },
+        "4": {
+          title: "Quantities of Main Items Executed in any single year",
+          value: "",
+          requirement: "",
+          description: "",
+          subPoints: {
+            "4.a": {
+              title: "Concrete Lining",
+              value: "Cum",
+              requirement: "16910",
+              description: ""
+            },
+            "4.b": {
+              title: "Steel Reinforcement",
+              value: "MT",
+              requirement: "431",
+              description: ""
+            },
+            "4.c": {
+              title: "Earthwork",
+              value: "Cum",
+              requirement: "60490",
+              description: ""
+            }
+          }
+        }
+      }
+      
+      // If no criteria exists, prefill with default data and auto-save
+      if (!hasValidCriteria) {
+        console.log("🔄 Prefilling default evaluation criteria")
+        setEditingCriteria(defaultCriteria)
+        
+        // Auto-save the prefilled criteria
+        const savePrefilledCriteria = async () => {
+          try {
+            const criteriaJsonString = JSON.stringify(defaultCriteria)
+            const response = await fetch(`${API_BASE_URL}/tenders/${tenderId}`, {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                evaluation_criteria_json: criteriaJsonString,
+              }),
+            })
+
+            if (response.ok) {
+              const updatedTender = await response.json()
+              setTender(updatedTender)
+              console.log("✅ Prefilled evaluation criteria saved automatically")
+            } else {
+              const errorText = await response.text()
+              console.error("❌ Failed to save prefilled criteria:", errorText)
+            }
+          } catch (err) {
+            console.error("❌ Error auto-saving prefilled criteria:", err)
+          }
+        }
+        
+        // Save after a short delay to ensure state is set
+        setTimeout(() => {
+          savePrefilledCriteria()
+        }, 500)
+      } else if (needsMigration) {
+        // Migrate old structure to new structure
+        console.log("🔄 Migrating old evaluation criteria structure")
+        const migratedCriteria: any = {}
+        
+        Object.keys(criteria).forEach(key => {
+          const item = criteria[key]
+          migratedCriteria[key] = {
+            title: item.title || "",
+            value: item.value || "",
+            requirement: item.requirement || (key === "1" ? "3106.13" : key === "2" ? "8283.00" : key === "3" ? "2484.90" : ""),
+            description: item.description || ""
+          }
+          
+          // Migrate sub-points if they exist
+          if (item.subPoints) {
+            migratedCriteria[key].subPoints = {}
+            Object.keys(item.subPoints).forEach(subKey => {
+              const subItem = item.subPoints[subKey]
+              // Fix sub-point keys: if key is "a", "b", "c", change to "4.a", "4.b", "4.c"
+              const newSubKey = subKey.includes(".") ? subKey : `${key}.${subKey}`
+              migratedCriteria[key].subPoints[newSubKey] = {
+                title: subItem.title || "",
+                value: subItem.value || "",
+                requirement: subItem.requirement || (newSubKey === "4.a" ? "16910" : newSubKey === "4.b" ? "431" : newSubKey === "4.c" ? "60490" : ""),
+                description: subItem.description || ""
+              }
+            })
+          }
+        })
+        
+        setEditingCriteria(migratedCriteria)
+        
+        // Auto-save the migrated criteria
+        const saveMigratedCriteria = async () => {
+          try {
+            const criteriaJsonString = JSON.stringify(migratedCriteria)
+            const response = await fetch(`${API_BASE_URL}/tenders/${tenderId}`, {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                evaluation_criteria_json: criteriaJsonString,
+              }),
+            })
+
+            if (response.ok) {
+              const updatedTender = await response.json()
+              setTender(updatedTender)
+              console.log("✅ Migrated evaluation criteria saved automatically")
+            } else {
+              const errorText = await response.text()
+              console.error("❌ Failed to save migrated criteria:", errorText)
+            }
+          } catch (err) {
+            console.error("❌ Error auto-saving migrated criteria:", err)
+          }
+        }
+        
+        // Save after a short delay to ensure state is set
+        setTimeout(() => {
+          saveMigratedCriteria()
+        }, 500)
+      } else {
+        console.log("✅ Using existing evaluation criteria")
+        setEditingCriteria(criteria)
+      }
       setEditingTenderName(tender.name)
     }
-  }, [tender])
+  }, [tender, tenderId])
 
   const handleSaveTenderName = async () => {
     if (!tender || !editingTenderName.trim()) return
@@ -321,13 +507,14 @@ export default function TenderDetailPage() {
       [nextNumber.toString()]: {
         title: "",
         value: "",
+        requirement: "",
         description: "",
       },
     })
     setIsEditing(true)
   }
 
-  const updateMainPoint = (key: string, field: "title" | "value" | "description", value: string) => {
+  const updateMainPoint = (key: string, field: "title" | "value" | "requirement" | "description", value: string) => {
     setEditingCriteria({
       ...editingCriteria,
       [key]: {
@@ -378,6 +565,7 @@ export default function TenderDetailPage() {
           [newSubKey]: {
             title: "",
             value: "",
+            requirement: "",
             description: "",
           },
         },
@@ -386,12 +574,12 @@ export default function TenderDetailPage() {
     setIsEditing(true)
   }
 
-  const updateSubPoint = (parentKey: string, subKey: string, field: "title" | "value" | "description", value: string) => {
+  const updateSubPoint = (parentKey: string, subKey: string, field: "title" | "value" | "requirement" | "description", value: string) => {
     const parent = editingCriteria[parentKey]
     if (!parent) return
 
     const existingSubPoints = parent.subPoints || {}
-    const existingSubPoint = existingSubPoints[subKey] || { title: "", value: "", description: "" }
+    const existingSubPoint = existingSubPoints[subKey] || { title: "", value: "", requirement: "", description: "" }
 
     setEditingCriteria({
       ...editingCriteria,
@@ -754,7 +942,7 @@ export default function TenderDetailPage() {
         </div>
 
         {/* Tabs */}
-        <Tabs defaultValue="summary" className="mb-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
           <TabsList>
             <TabsTrigger value="summary">Summary</TabsTrigger>
             <TabsTrigger value="evaluation">Evaluation Criteria</TabsTrigger>
@@ -763,52 +951,173 @@ export default function TenderDetailPage() {
 
           <TabsContent value="summary" className="mt-6">
             <div className="space-y-6">
-              {/* Summary Section - Above PDF */}
-              <Card className="border-2">
+              {/* Tender Summary - Above PDF */}
+              <Card>
                 <CardContent className="p-6">
-                  <div className="mb-6 flex items-center gap-2">
-                    <Info className="h-6 w-6 text-primary" />
-                    <h2 className="text-2xl font-bold">Summary</h2>
+                  <div className="mb-6 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <FileText className="h-5 w-5 text-primary" />
+                      <h2 className="text-xl font-semibold">Tender Summary</h2>
+                    </div>
+                    <Button
+                      size="sm"
+                      onClick={() => setActiveTab("evaluation")}
+                      className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground"
+                    >
+                      <ArrowRight className="h-4 w-4" />
+                      Go to Evaluation Criteria
+                    </Button>
                   </div>
-                  {!hasCriteria && !hasBids ? (
-                    <div className="py-8 text-center">
-                      <p className="text-muted-foreground">No summary data available yet.</p>
-                      <p className="mt-2 text-sm text-muted-foreground">
-                        Add evaluation criteria and bids to see summary information.
+                  
+                  <div className="space-y-6">
+                    {/* Project Information */}
+                    <div>
+                      <h3 className="mb-3 text-lg font-semibold text-slate-900">Project</h3>
+                      <p className="text-slate-700 font-medium">Kukadi Irrigation Project – Special Repairs to Left Bank Canal (Km 1–60)</p>
+                      <div className="mt-2 space-y-1 text-sm text-slate-600">
+                        <p><span className="font-medium">District:</span> Pune / Ahilyanagar</p>
+                        <p><span className="font-medium">Department:</span> Water Resources Department (WRD), Maharashtra</p>
+                      </div>
+                    </div>
+
+                    {/* Tender Value */}
+                    <div className="border-t pt-4">
+                      <h3 className="mb-3 text-lg font-semibold text-slate-900">Tender Value</h3>
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <p className="text-sm text-slate-600 mb-1">Cost Put to Tender</p>
+                        <p className="text-2xl font-bold text-blue-900">₹ 8,283.00 Lakhs</p>
+                      </div>
+                    </div>
+
+                    {/* Bids Received - Integrated into Summary */}
+                    {hasBids && (
+                      <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-sm font-medium text-green-700 mb-1">Bids Received</p>
+                            <p className="text-3xl font-bold text-green-900">{bidIds.length}</p>
+                            <p className="text-xs text-green-600 mt-1">
+                              {bidIds.length === 1 ? "bid" : "bids"} submitted for evaluation
+                            </p>
+                          </div>
+                          <div className="bg-green-100 rounded-full p-3">
+                            <FileText className="h-8 w-8 text-green-700" />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Financial Requirements */}
+                    <div className="border-t pt-4">
+                      <h3 className="mb-3 text-lg font-semibold text-slate-900">Key Financial Requirements</h3>
+                      <div className="overflow-x-auto">
+                        <table className="w-full border-collapse">
+                          <thead>
+                            <tr className="bg-slate-50">
+                              <th className="border border-slate-200 px-4 py-2 text-left text-sm font-semibold text-slate-700">Component</th>
+                              <th className="border border-slate-200 px-4 py-2 text-left text-sm font-semibold text-slate-700">Amount / %</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-700">Tender Fee</td>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-900 font-medium">₹5,900 (incl. GST)</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-700">EMD</td>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-900 font-medium">₹41.42 Lakhs</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-700">Security Deposit (SD)</td>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-900 font-medium">2% of tender cost = ₹165.66 Lakhs (1% upfront + 1% via RA bills)</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-700">APSD (Additional Performance Security Deposit)</td>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-900 font-medium">Required when bidder quotes &gt;1% below tender cost (slab system)</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    {/* Contract Duration */}
+                    <div className="border-t pt-4">
+                      <h3 className="mb-3 text-lg font-semibold text-slate-900">Contract Duration</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                          <p className="text-sm text-slate-600 mb-1">Project Duration</p>
+                          <p className="text-lg font-semibold text-slate-900">24 Months</p>
+                          <p className="text-xs text-slate-500 mt-1">(including monsoon)</p>
+                        </div>
+                        <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                          <p className="text-sm text-slate-600 mb-1">Defect Liability Period (DLP)</p>
+                          <p className="text-lg font-semibold text-slate-900">60 Months</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* APSD Information */}
+                    <div className="border-t pt-4">
+                      <h3 className="mb-3 text-lg font-semibold text-slate-900">APSD (Additional Performance Security Deposit)</h3>
+                      <p className="text-sm text-slate-600 mb-3">Applies <strong>only if bid quote is &gt;1% below the tender cost</strong>.</p>
+                      <div className="overflow-x-auto">
+                        <table className="w-full border-collapse">
+                          <thead>
+                            <tr className="bg-slate-50">
+                              <th className="border border-slate-200 px-4 py-2 text-left text-sm font-semibold text-slate-700">Bid Below CPR</th>
+                              <th className="border border-slate-200 px-4 py-2 text-left text-sm font-semibold text-slate-700">APSD Required</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-700">1–10%</td>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-900 font-medium">1% of Tender Cost</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-700">10–15%</td>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-900 font-medium">1% + (Offer% – 10%)</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-700">&gt;15%</td>
+                              <td className="border border-slate-200 px-4 py-2 text-sm text-slate-900 font-medium">6% + 2 × (Offer% – 15%)</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <p className="text-xs text-slate-500 mt-3">
+                        <strong>Refund Policy:</strong> 50% refunded after work completion, 50% refunded after DLP completion
                       </p>
                     </div>
-                  ) : (
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-                      <div className="p-4 bg-muted/50 rounded-lg border">
-                        <p className="text-sm font-medium text-muted-foreground mb-1">Tender ID</p>
-                        <p className="text-lg font-bold">{tender.tender_id}</p>
-                      </div>
-                      {hasBids && (
-                        <div className="p-4 bg-muted/50 rounded-lg border">
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Bids Received</p>
-                          <p className="text-lg font-bold">{bidIds.length}</p>
-                        </div>
-                      )}
-                      {hasCriteria && (
-                        <div className="p-4 bg-muted/50 rounded-lg border">
-                          <p className="text-sm font-medium text-muted-foreground mb-1">Evaluation Criteria</p>
-                          <p className="text-lg font-bold">{Object.keys(evaluationCriteria).length} Points</p>
-                        </div>
-                      )}
-                      <div className="p-4 bg-muted/50 rounded-lg border">
-                        <p className="text-sm font-medium text-muted-foreground mb-1">Created At</p>
-                        <p className="text-lg font-bold">
-                          {new Date(tender.created_at).toLocaleDateString()}
-                        </p>
-                      </div>
-                      <div className="p-4 bg-muted/50 rounded-lg border">
-                        <p className="text-sm font-medium text-muted-foreground mb-1">Last Updated</p>
-                        <p className="text-lg font-bold">
-                          {new Date(tender.updated_at).toLocaleDateString()}
+
+                    {/* Important Notes */}
+                    <div className="border-t pt-4">
+                      <h3 className="mb-3 text-lg font-semibold text-slate-900">Important Notes</h3>
+                      <ul className="space-y-2 text-sm text-slate-700">
+                        <li className="flex items-start gap-2">
+                          <span className="text-red-600 mt-1">•</span>
+                          <span>False documents → <strong>Blacklisting for 2 years</strong>, EMD/SD/APSD forfeiture</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-600 mt-1">•</span>
+                          <span>JV Allowed for tenders &gt; ₹ 25 Crores (this tender qualifies)</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-600 mt-1">•</span>
+                          <span>JV evaluated proportionately for turnover &amp; bid capacity</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Executive Summary */}
+                    <div className="border-t pt-4">
+                      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4">
+                        <h3 className="mb-2 text-lg font-semibold text-slate-900">Executive Summary</h3>
+                        <p className="text-sm leading-relaxed text-slate-700">
+                          The tender for <strong>Special Repairs to Kukadi Left Bank Canal (Km 1–60)</strong> is valued at <strong>₹ 8283 Lakhs</strong>, with a completion period of <strong>24 months</strong> and a DLP of <strong>60 months</strong>. Bidders are evaluated through stringent <strong>financial, experience, capacity, machinery, and manpower thresholds</strong>, including minimum turnover of <strong>₹ 3106.13 Lakhs</strong>, bid capacity of <strong>₹ 8283 Lakhs</strong>, and certified execution quantities of lining, steel, and earthwork. A self-evaluation process ensures transparency and document-based qualification.
                         </p>
                       </div>
                     </div>
-                  )}
+                  </div>
                 </CardContent>
               </Card>
 
@@ -845,22 +1154,6 @@ export default function TenderDetailPage() {
                       />
                     )}
                   </div>
-                </CardContent>
-              </Card>
-
-              {/* Description */}
-              <Card>
-                <CardContent className="p-6">
-                  <h2 className="mb-4 text-xl font-semibold">Description</h2>
-                  {!hasCriteria && !hasBids ? (
-                    <p className="text-muted-foreground">
-                      No description available. Summary information will appear here once evaluation criteria and bids are added.
-                    </p>
-                  ) : (
-                    <p className="text-muted-foreground">
-                      Tender details and summary will be displayed here once evaluation criteria and bids are configured.
-                    </p>
-                  )}
                 </CardContent>
               </Card>
             </div>
@@ -954,6 +1247,7 @@ export default function TenderDetailPage() {
                           <TableHead className="w-20">Sr. No</TableHead>
                           <TableHead>Criteria</TableHead>
                           <TableHead className="w-32">Unit</TableHead>
+                          <TableHead className="w-32">Requirement</TableHead>
                           <TableHead>Description</TableHead>
                         </TableRow>
                       </TableHeader>
@@ -970,6 +1264,7 @@ export default function TenderDetailPage() {
                                 <TableCell className="font-medium">{key}</TableCell>
                                 <TableCell className="font-medium">{point.title || "-"}</TableCell>
                                 <TableCell>{point.value || "-"}</TableCell>
+                                <TableCell className="font-medium">{point.requirement || "-"}</TableCell>
                                 <TableCell className="text-sm text-muted-foreground">
                                   {point.description || "-"}
                                 </TableCell>
@@ -1001,6 +1296,7 @@ export default function TenderDetailPage() {
                                     </TableCell>
                                     <TableCell className="pl-4">{subPoint.title || "-"}</TableCell>
                                     <TableCell>{subPoint.value || "-"}</TableCell>
+                                    <TableCell className="font-medium">{subPoint.requirement || "-"}</TableCell>
                                     <TableCell className="text-sm text-muted-foreground">
                                       {subPoint.description || "-"}
                                     </TableCell>
@@ -1013,6 +1309,16 @@ export default function TenderDetailPage() {
                           })}
                       </TableBody>
                     </Table>
+                    {/* Approve and Go to Bids Button */}
+                    <div className="mt-6 flex justify-end">
+                      <Button
+                        onClick={() => setActiveTab("bids")}
+                        className="flex items-center gap-2"
+                      >
+                        <CheckCircle className="h-4 w-4" />
+                        Approve and Go to Bids
+                      </Button>
+                    </div>
                   </div>
                 ) : (
                   // Edit View
@@ -1069,9 +1375,15 @@ export default function TenderDetailPage() {
                                     className="flex-1"
                                   />
                                   <Input
-                                    placeholder="Value"
+                                    placeholder="Unit"
                                     value={point.value || ""}
                                     onChange={(e) => updateMainPoint(key, "value", e.target.value)}
+                                    className="w-32"
+                                  />
+                                  <Input
+                                    placeholder="Requirement"
+                                    value={point.requirement || ""}
+                                    onChange={(e) => updateMainPoint(key, "requirement", e.target.value)}
                                     className="w-32"
                                   />
                                   <Button
@@ -1149,9 +1461,15 @@ export default function TenderDetailPage() {
                                             className="flex-1"
                                           />
                                           <Input
-                                            placeholder="Value"
+                                            placeholder="Unit"
                                             value={subPoint.value || ""}
                                             onChange={(e) => updateSubPoint(key, subKey, "value", e.target.value)}
+                                            className="w-32"
+                                          />
+                                          <Input
+                                            placeholder="Requirement"
+                                            value={subPoint.requirement || ""}
+                                            onChange={(e) => updateSubPoint(key, subKey, "requirement", e.target.value)}
                                             className="w-32"
                                           />
                                           <Button

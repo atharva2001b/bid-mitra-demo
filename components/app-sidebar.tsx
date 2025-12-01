@@ -71,19 +71,7 @@ const navigationItems: NavigationItem[] = [
   {
     title: "Bids",
     icon: List,
-    href: "/bids2",
-    badge: null,
-  },
-  {
-    title: "Bids3",
-    icon: List,
-    href: "/bids3",
-    badge: null,
-  },
-  {
-    title: "Bids4",
-    icon: List,
-    href: "/bids4",
+    href: "/bids",
     badge: null,
   },
   {

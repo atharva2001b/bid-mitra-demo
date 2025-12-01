@@ -38,8 +38,16 @@ interface Tender {
   updated_at: string
 }
 
+interface Bid {
+  bid_id: string
+  bid_name: string
+  result: string
+  created_at: string
+}
+
 export default function TendersPage() {
   const [tenders, setTenders] = useState<Tender[]>([])
+  const [bids, setBids] = useState<Bid[]>([])
   const [loading, setLoading] = useState(true)
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false)
   const [uploadName, setUploadName] = useState("")
@@ -51,10 +59,38 @@ export default function TendersPage() {
   const [tenderToDelete, setTenderToDelete] = useState<{ id: string; name: string; bidCount: number } | null>(null)
   const [deleteBidsOption, setDeleteBidsOption] = useState<boolean>(false)
 
-  // Fetch tenders from API
+  // Fetch tenders and bids from API
   useEffect(() => {
-    fetchTenders()
+    fetchData()
   }, [])
+
+  const fetchData = async () => {
+    try {
+      setLoading(true)
+      const [tendersResponse, bidsResponse] = await Promise.all([
+        fetch(`${API_BASE_URL}/tenders`),
+        fetch(`${API_BASE_URL}/bids`)
+      ])
+
+      if (tendersResponse.ok) {
+        const data = await tendersResponse.json()
+        setTenders(data.tenders || [])
+      } else {
+        console.error("Failed to fetch tenders:", await tendersResponse.text())
+      }
+
+      if (bidsResponse.ok) {
+        const bidsData = await bidsResponse.json()
+        setBids(bidsData.bids || [])
+      } else {
+        console.error("Failed to fetch bids:", await bidsResponse.text())
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const fetchTenders = async () => {
     try {
@@ -109,8 +145,8 @@ export default function TendersPage() {
 
       if (response.ok) {
         const result = await response.json()
-        // Refresh tenders list
-        await fetchTenders()
+        // Refresh tenders and bids list
+        await fetchData()
         
         // Show success message
         if (deleteBidsOption && result.deleted_bids_count > 0) {
@@ -174,8 +210,8 @@ export default function TendersPage() {
         setUploadName("")
         setUploadFile(null)
         setIsUploadDialogOpen(false)
-        // Refresh tenders list
-        await fetchTenders()
+        // Refresh tenders and bids list
+        await fetchData()
       } else {
         const errorText = await response.text()
         setUploadError(errorText || "Failed to upload tender")
@@ -222,11 +258,28 @@ export default function TendersPage() {
   }
 
   // Calculate statistics
+  // Helper function to check if a bid is evaluated
+  const isBidEvaluated = (bidId: string): boolean => {
+    const bid = bids.find(b => b.bid_id === bidId)
+    if (!bid) return false
+    try {
+      const result = JSON.parse(bid.result || "{}")
+      return result && Object.keys(result).length > 0
+    } catch {
+      return false
+    }
+  }
+
+  // OPEN TENDERS: Tenders that have no bids OR have at least one pending bid (same as activeTenders in dashboard)
+  const openTenders = tenders.filter(t => {
+    const bidIds = JSON.parse(t.bid_ids || "[]")
+    if (bidIds.length === 0) return true // No bids = open
+    // If any bid is pending, tender is open
+    return bidIds.some((bidId: string) => !isBidEvaluated(bidId))
+  }).length
+
   const stats = {
-    newTenders: tenders.filter(t => {
-      const criteria = JSON.parse(t.evaluation_criteria_json || "{}")
-      return Object.keys(criteria).length === 0
-    }).length,
+    openTenders,
     underAnalysis: tenders.filter(t => {
       const criteria = JSON.parse(t.evaluation_criteria_json || "{}")
       const bidIds = JSON.parse(t.bid_ids || "[]")
@@ -251,11 +304,13 @@ export default function TendersPage() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium">NEW TENDERS</CardTitle>
+                <CardTitle className="text-sm font-medium">OPEN TENDERS</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">1</div>
-                <p className="text-xs text-muted-foreground">Recently uploaded</p>
+                <div className="text-2xl font-bold">
+                  {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : stats.openTenders}
+                </div>
+                <p className="text-xs text-muted-foreground">Accepting bids</p>
               </CardContent>
             </Card>
 

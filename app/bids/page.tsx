@@ -1,12 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
+import { useState, useEffect, Suspense } from "react"
+import { useRouter } from "next/navigation"
 import { AppLayout } from "@/components/app-layout"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import {
   Table,
   TableBody,
@@ -15,7 +13,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Search, ArrowDown, Upload, Loader2, Trash2 } from "lucide-react"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Loader2, Trash2 } from "lucide-react"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
@@ -23,53 +29,20 @@ interface Bid {
   bid_id: string
   bid_name: string
   pdf_path: string
-  result: string
-  tender_id: string
-  created_at: string
-  updated_at: string
+  tender_id?: string
 }
 
-interface Tender {
-  tender_id: string
-  name: string
-}
-
-interface BidWithTender extends Bid {
-  tenderName?: string
-  tenderId?: string
-  aiEvaluation: string
-  aiStatusColor: string
-  status: string
-  statusColor: string
-  submittedDate: string
-}
-
-export default function BidsPage() {
-  const [bids, setBids] = useState<BidWithTender[]>([])
+function BidsListContent() {
+  const router = useRouter()
+  const [bids, setBids] = useState<Bid[]>([])
   const [loading, setLoading] = useState(true)
-  const [tenders, setTenders] = useState<Record<string, Tender>>({})
-  const [deletingBidId, setDeletingBidId] = useState<string | null>(null)
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
+  const [bidToDelete, setBidToDelete] = useState<Bid | null>(null)
+  const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
     fetchBids()
-    fetchTenders()
   }, [])
-
-  const fetchTenders = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/tenders`)
-      if (response.ok) {
-        const data = await response.json()
-        const tendersMap: Record<string, Tender> = {}
-        data.tenders?.forEach((tender: Tender) => {
-          tendersMap[tender.tender_id] = tender
-        })
-        setTenders(tendersMap)
-      }
-    } catch (error) {
-      console.error("Error fetching tenders:", error)
-    }
-  }
 
   const fetchBids = async () => {
     try {
@@ -77,47 +50,7 @@ export default function BidsPage() {
       const response = await fetch(`${API_BASE_URL}/bids`)
       if (response.ok) {
         const data = await response.json()
-        const bidsData: Bid[] = data.bids || []
-        
-        // Map bids to include tender information and formatted data
-        const mappedBids: BidWithTender[] = bidsData.map((bid) => {
-          const tender = bid.tender_id ? tenders[bid.tender_id] : null
-          const resultJson = JSON.parse(bid.result || "{}")
-          
-          // Determine AI evaluation status
-          const hasResult = resultJson && Object.keys(resultJson).length > 0
-          const aiEvaluation = hasResult ? "Done" : "Pending"
-          const aiStatusColor = hasResult ? "bg-green-500" : "bg-yellow-500"
-          
-          // Determine status (simplified - can be enhanced based on result structure)
-          const status = hasResult ? "Submitted" : "Not validated"
-          const statusColor = hasResult 
-            ? "bg-green-100 text-green-800" 
-            : "bg-yellow-100 text-yellow-800"
-          
-          // Format date
-          const date = new Date(bid.created_at)
-          const submittedDate = date.toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric"
-          })
-          
-          return {
-            ...bid,
-            tenderName: tender?.name || "N/A",
-            tenderId: bid.tender_id || "",
-            aiEvaluation,
-            aiStatusColor,
-            status,
-            statusColor,
-            submittedDate
-          }
-        })
-        
-        setBids(mappedBids)
-      } else {
-        console.error("Failed to fetch bids:", await response.text())
+        setBids(data.bids || [])
       }
     } catch (error) {
       console.error("Error fetching bids:", error)
@@ -126,37 +59,35 @@ export default function BidsPage() {
     }
   }
 
-  // Refetch bids when tenders are loaded (to update tender names)
-  useEffect(() => {
-    if (Object.keys(tenders).length > 0) {
-      fetchBids()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tenders])
+  const handleDeleteClick = (bid: Bid, e: React.MouseEvent) => {
+    e.stopPropagation()
+    setBidToDelete(bid)
+    setDeleteDialogOpen(true)
+  }
 
-  const handleDeleteBid = async (bidId: string) => {
-    if (!confirm("Are you sure you want to delete this bid? This action cannot be undone.")) {
-      return
-    }
+  const handleDeleteConfirm = async () => {
+    if (!bidToDelete) return
 
     try {
-      setDeletingBidId(bidId)
-      const response = await fetch(`${API_BASE_URL}/bids/${bidId}`, {
+      setDeleting(true)
+      const response = await fetch(`${API_BASE_URL}/bids/${bidToDelete.bid_id}`, {
         method: "DELETE",
       })
 
       if (response.ok) {
-        // Refresh bids list
-        await fetchBids()
+        // Remove the bid from the list
+        setBids(bids.filter((b) => b.bid_id !== bidToDelete.bid_id))
+        setDeleteDialogOpen(false)
+        setBidToDelete(null)
       } else {
-        const errorText = await response.text()
-        alert(`Failed to delete bid: ${errorText}`)
+        const errorData = await response.json()
+        alert(`Failed to delete bid: ${errorData.detail || "Unknown error"}`)
       }
     } catch (error) {
       console.error("Error deleting bid:", error)
-      alert("An error occurred while deleting the bid")
+      alert("Failed to delete bid. Please try again.")
     } finally {
-      setDeletingBidId(null)
+      setDeleting(false)
     }
   }
 
@@ -164,119 +95,75 @@ export default function BidsPage() {
     <AppLayout>
       <div className="p-8">
         {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold">Bids</h1>
-            <p className="text-sm text-muted-foreground">
-              {loading ? "Loading..." : `${bids.length} ${bids.length === 1 ? "Bid" : "Bids"}`}
-            </p>
-          </div>
-          <Button>
-            <Upload className="mr-2 h-4 w-4" />
-            Upload Bid
-          </Button>
-        </div>
-
-        {/* Search */}
-        <div className="mb-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input placeholder="Search bids..." className="pl-10" />
-          </div>
+        <div className="mb-6">
+          <h1 className="text-2xl font-semibold text-slate-900">Bids Review</h1>
+          <p className="text-sm text-slate-500 mt-1">
+            {bids.length} {bids.length === 1 ? "Bid" : "Bids"} available
+          </p>
         </div>
 
         {/* Bids Table */}
-        <Card>
+        <Card className="border border-slate-200 shadow-sm">
           <CardContent className="p-0">
             <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead>Sr. No</TableHead>
-                  <TableHead>
-                    <div className="flex items-center gap-2">
-                      Name <ArrowDown className="h-4 w-4" />
-                    </div>
-                  </TableHead>
-                  <TableHead>Tender</TableHead>
-                  <TableHead>Bid Amount</TableHead>
-                  <TableHead>Submitted Date</TableHead>
-                  <TableHead>AI Evaluation</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Actions</TableHead>
+                <TableRow className="bg-slate-50/50">
+                  <TableHead className="font-semibold text-slate-700">Sr. No</TableHead>
+                  <TableHead className="font-semibold text-slate-700">Name</TableHead>
+                  <TableHead className="font-semibold text-slate-700">Bid ID</TableHead>
+                  <TableHead className="font-semibold text-slate-700">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {loading ? (
                   <TableRow>
-                    <TableCell colSpan={8} className="text-center py-8">
-                      <Loader2 className="h-6 w-6 animate-spin mx-auto" />
-                      <p className="mt-2 text-sm text-muted-foreground">Loading bids...</p>
+                    <TableCell colSpan={4} className="text-center py-12">
+                      <Loader2 className="h-6 w-6 animate-spin mx-auto text-slate-400" />
+                      <p className="mt-2 text-sm text-slate-500">Loading bids...</p>
                     </TableCell>
                   </TableRow>
                 ) : bids.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={8} className="text-center py-8">
-                      <p className="text-sm text-muted-foreground">No bids found. Upload your first bid to get started.</p>
+                    <TableCell colSpan={4} className="text-center py-12">
+                      <p className="text-sm text-slate-500">No bids found. Upload your first bid to get started.</p>
                     </TableCell>
                   </TableRow>
                 ) : (
-                  bids.map((bid, index) => (
-                    <TableRow key={bid.bid_id}>
-                      <TableCell>{index + 1}</TableCell>
+                  bids.map((b, index) => (
+                    <TableRow 
+                      key={b.bid_id} 
+                      className="cursor-pointer hover:bg-slate-50/50 transition-colors border-b border-slate-100"
+                      onClick={() => {
+                        router.push(`/bids/${b.bid_id}`)
+                      }}
+                    >
+                      <TableCell className="text-slate-600">{index + 1}</TableCell>
                       <TableCell>
-                        <Link
-                          href={`/bids/${bid.bid_id}`}
-                          className="font-medium hover:text-primary"
-                        >
-                          {bid.bid_name}
-                        </Link>
+                        <div className="font-medium text-slate-900">{b.bid_name}</div>
                       </TableCell>
                       <TableCell>
-                        {bid.tenderId ? (
-                          <div>
-                            <Link
-                              href={`/tenders/${bid.tenderId}`}
-                              className="text-sm hover:text-primary"
-                            >
-                              {bid.tenderName || "N/A"}
-                            </Link>
-                            <div className="text-xs text-muted-foreground">{bid.tenderId.slice(0, 8)}...</div>
-                          </div>
-                        ) : (
-                          <span className="text-sm text-muted-foreground">No tender linked</span>
-                        )}
-                      </TableCell>
-                      <TableCell>-</TableCell>
-                      <TableCell>{bid.submittedDate}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <div className={`h-2 w-2 rounded-full ${bid.aiStatusColor}`} />
-                          <span className="text-sm">{bid.aiEvaluation}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge className={bid.statusColor}>{bid.status}</Badge>
+                        <div className="text-sm text-slate-500 font-mono">{b.bid_id}</div>
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">
-                          <Link
-                            href={`/bids/${bid.bid_id}`}
-                            className="text-sm text-primary hover:underline"
-                          >
-                            View
-                          </Link>
                           <Button
-                            variant="ghost"
+                            variant="outline"
                             size="sm"
-                            onClick={() => handleDeleteBid(bid.bid_id)}
-                            disabled={deletingBidId === bid.bid_id}
-                            title="Delete bid"
+                            className="border-slate-200 hover:bg-slate-50"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              router.push(`/bids/${b.bid_id}`)
+                            }}
                           >
-                            {deletingBidId === bid.bid_id ? (
-                              <Loader2 className="h-4 w-4 text-red-500 animate-spin" />
-                            ) : (
-                              <Trash2 className="h-4 w-4 text-red-500" />
-                            )}
+                            Open
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700"
+                            onClick={(e) => handleDeleteClick(b, e)}
+                          >
+                            <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
                       </TableCell>
@@ -288,22 +175,63 @@ export default function BidsPage() {
           </CardContent>
         </Card>
 
-        {/* Pagination */}
-        <div className="mt-4 flex items-center justify-between">
-          <div className="text-sm text-muted-foreground">Page 1 of 1</div>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm">
-              ← Previous
-            </Button>
-            <Button variant="outline" size="sm" className="bg-primary/10">
-              1
-            </Button>
-            <Button variant="outline" size="sm">
-              Next →
-            </Button>
-          </div>
-        </div>
+        {/* Delete Confirmation Dialog */}
+        <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Delete Bid</DialogTitle>
+              <DialogDescription>
+                Are you sure you want to delete "{bidToDelete?.bid_name}"? This action cannot be undone and will permanently delete the bid and all associated data.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setDeleteDialogOpen(false)
+                  setBidToDelete(null)
+                }}
+                disabled={deleting}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={handleDeleteConfirm}
+                disabled={deleting}
+              >
+                {deleting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Deleting...
+                  </>
+                ) : (
+                  "Delete"
+                )}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </AppLayout>
   )
 }
+
+export default function BidsPage() {
+  return (
+    <Suspense fallback={
+      <AppLayout>
+        <div className="flex items-center justify-center h-screen">
+          <Loader2 className="h-8 w-8 animate-spin text-slate-400" />
+        </div>
+      </AppLayout>
+    }>
+      <BidsListContent />
+    </Suspense>
+  )
+}
+
+
+
+
+
