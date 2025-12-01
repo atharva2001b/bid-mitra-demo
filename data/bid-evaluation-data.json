@@ -1917,7 +1917,7 @@
     }
   ],
   "created_at": "2025-11-17T14:56:23.297Z",
-  "updated_at": "2025-12-01T02:47:11.812Z",
+  "updated_at": "2025-12-01T03:37:07.336Z",
   "bidder_evaluation": {
     "bid_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
     "tender_id": "2581f451-0aca-4562-a8e9-a15791f5439d",
@@ -2111,37 +2111,37 @@
     "bookmarked_pages": [],
     "chat_messages": [
       {
-        "message_id": "user-1764557190549",
+        "message_id": "user-1764560179750",
         "role": "user",
         "content": "Annual turnover submitted by bidder evaluation sheet for Abhiraj.",
         "criteria_key": "1",
         "bidder_name": "Shraddha",
-        "created_at": "2025-12-01T02:46:30.549Z",
+        "created_at": "2025-12-01T03:36:19.750Z",
         "searchResults": [],
         "isLoading": false
       },
       {
-        "message_id": "user-1764557224469",
+        "message_id": "user-1764560225695",
         "role": "user",
         "content": "Annual turnover submitted by bidder evaluation sheet for Shraddha.",
         "criteria_key": "1",
         "bidder_name": "Shankar",
-        "created_at": "2025-12-01T02:47:04.469Z",
+        "created_at": "2025-12-01T03:37:05.695Z",
         "searchResults": [],
         "isLoading": false
       },
       {
-        "message_id": "loading-1764557224469",
+        "message_id": "loading-1764560225695",
         "role": "assistant",
         "content": "Searching for bidder evaluation sheet information...",
         "criteria_key": "1",
         "bidder_name": "Shankar",
-        "created_at": "2025-12-01T02:47:04.469Z",
+        "created_at": "2025-12-01T03:37:05.695Z",
         "searchResults": [],
         "isLoading": true
       }
     ],
-    "updated_at": "2025-12-01T02:47:05.882Z"
+    "updated_at": "2025-12-01T03:37:07.327Z"
   },
   "submitted_evidence": {
     "bid_id": "f33817e8-a075-4547-8193-e63a2de6d04e",

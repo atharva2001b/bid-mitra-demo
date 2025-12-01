@@ -40,6 +40,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Place your PDF files in the `public/` folder and reference them in `mock-bids.json` using paths like `/sample-bid.pdf`.
 
+**Note:** Large PDF files (>100MB) are excluded from git via `.gitignore`. You'll need to add them manually after cloning the repository.
+
 Example:
 ```json
 {
