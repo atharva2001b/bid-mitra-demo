@@ -398,21 +398,24 @@ function Bids4CockpitContent() {
       // Only clear here if partner hasn't changed (to avoid double clearing)
       setMessages(prev => {
         // Check if current messages are for a different partner
-        const currentBidderInMessages = prev.find((msg: any) => {
+        let currentBidderInMessages: string | null = null
+        for (const msg of prev) {
           // Try to extract bidder name from message content
           if (msg.content) {
             if (msg.content.includes("Abhiraj") && !msg.content.includes("Shraddha") && !msg.content.includes("Shankar")) {
-              return "Abhiraj"
+              currentBidderInMessages = "Abhiraj"
+              break
             }
             if (msg.content.includes("Shraddha") && !msg.content.includes("Abhiraj") && !msg.content.includes("Shankar")) {
-              return "Shraddha"
+              currentBidderInMessages = "Shraddha"
+              break
             }
             if (msg.content.includes("Shankar") && !msg.content.includes("Abhiraj") && !msg.content.includes("Shraddha")) {
-              return "Shankar"
+              currentBidderInMessages = "Shankar"
+              break
             }
           }
-          return null
-        })
+        }
         
         // If messages are for a different partner, clear them
         if (currentBidderInMessages && currentBidderInMessages !== selectedBidder) {
