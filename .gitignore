@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Large PDF files (add manually or use Git LFS)
+public/*.pdf
