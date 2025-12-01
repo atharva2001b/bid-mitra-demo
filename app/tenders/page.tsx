@@ -25,8 +25,8 @@ import {
 } from "@/components/ui/dialog"
 import { ArrowUp, Search, ArrowDown, Info, Upload, Loader2, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+import mockBids from "@/data/mock-bids.json"
+import mockTender from "@/data/mock-tender.json"
 
 interface Tender {
   tender_id: string
@@ -67,26 +67,11 @@ export default function TendersPage() {
   const fetchData = async () => {
     try {
       setLoading(true)
-      const [tendersResponse, bidsResponse] = await Promise.all([
-        fetch(`${API_BASE_URL}/tenders`),
-        fetch(`${API_BASE_URL}/bids`)
-      ])
-
-      if (tendersResponse.ok) {
-        const data = await tendersResponse.json()
-        setTenders(data.tenders || [])
-      } else {
-        console.error("Failed to fetch tenders:", await tendersResponse.text())
-      }
-
-      if (bidsResponse.ok) {
-        const bidsData = await bidsResponse.json()
-        setBids(bidsData.bids || [])
-      } else {
-        console.error("Failed to fetch bids:", await bidsResponse.text())
-      }
+      // Use mock data instead of API calls
+      setTenders([mockTender as Tender])
+      setBids(mockBids.bids as Bid[])
     } catch (error) {
-      console.error("Error fetching data:", error)
+      console.error("Error loading data:", error)
     } finally {
       setLoading(false)
     }
@@ -95,15 +80,10 @@ export default function TendersPage() {
   const fetchTenders = async () => {
     try {
       setLoading(true)
-      const response = await fetch(`${API_BASE_URL}/tenders`)
-      if (response.ok) {
-        const data = await response.json()
-        setTenders(data.tenders || [])
-      } else {
-        console.error("Failed to fetch tenders:", await response.text())
-      }
+      // Use mock data instead of API call
+      setTenders([mockTender as Tender])
     } catch (error) {
-      console.error("Error fetching tenders:", error)
+      console.error("Error loading tenders:", error)
     } finally {
       setLoading(false)
     }
@@ -138,26 +118,14 @@ export default function TendersPage() {
       setDeletingTenderId(tenderToDelete.id)
       setDeleteDialogOpen(false)
       
-      const url = `${API_BASE_URL}/tenders/${tenderToDelete.id}?delete_bids=${deleteBidsOption}`
-      const response = await fetch(url, {
-        method: "DELETE",
-      })
-
-      if (response.ok) {
-        const result = await response.json()
-        // Refresh tenders and bids list
-        await fetchData()
-        
-        // Show success message
-        if (deleteBidsOption && result.deleted_bids_count > 0) {
-          alert(`Tender and ${result.deleted_bids_count} associated bids deleted successfully.`)
-        } else {
-          alert("Tender deleted successfully.")
-        }
-      } else {
-        const errorText = await response.text()
-        alert(`Failed to delete tender: ${errorText}`)
+      // In demo mode, just remove from local state
+      setTenders(tenders.filter((t) => t.tender_id !== tenderToDelete.id))
+      if (deleteBidsOption) {
+        // Also remove associated bids
+        const bidIds = JSON.parse(mockTender.bid_ids || "[]")
+        setBids(bids.filter((b) => !bidIds.includes(b.bid_id)))
       }
+      alert("Tender deleted successfully (demo mode).")
     } catch (error) {
       console.error("Error deleting tender:", error)
       alert("An error occurred while deleting the tender")
@@ -194,31 +162,15 @@ export default function TendersPage() {
     setUploadError(null)
 
     try {
-      const formData = new FormData()
-      formData.append("file", uploadFile)
-      formData.append("name", uploadName.trim())
-
-      const response = await fetch(`${API_BASE_URL}/tenders/upload`, {
-        method: "POST",
-        body: formData,
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        console.log("Tender uploaded successfully:", data)
-        // Reset form
-        setUploadName("")
-        setUploadFile(null)
-        setIsUploadDialogOpen(false)
-        // Refresh tenders and bids list
-        await fetchData()
-      } else {
-        const errorText = await response.text()
-        setUploadError(errorText || "Failed to upload tender")
-      }
+      // In independent/demo mode, uploads are not supported
+      // Show a message instead
+      alert("Upload functionality is not available in independent frontend mode. This is a demo version with mock data.")
+      setUploadName("")
+      setUploadFile(null)
+      setIsUploadDialogOpen(false)
     } catch (error) {
       console.error("Error uploading tender:", error)
-      setUploadError("An error occurred while uploading the tender")
+      setUploadError("Uploads are not supported in demo mode")
     } finally {
       setUploading(false)
     }

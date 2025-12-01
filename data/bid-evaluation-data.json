@@ -1917,13 +1917,13 @@
     }
   ],
   "created_at": "2025-11-17T14:56:23.297Z",
-  "updated_at": "2025-11-28T06:02:37.573Z",
+  "updated_at": "2025-12-01T02:47:11.812Z",
   "bidder_evaluation": {
     "bid_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
     "tender_id": "2581f451-0aca-4562-a8e9-a15791f5439d",
     "current_selected_criteria": "1",
-    "current_selected_bidder": "Abhiraj",
-    "current_pdf_page": 1,
+    "current_selected_bidder": "Shankar",
+    "current_pdf_page": 27,
     "criterias": {
       "1": {
         "metadata": {
@@ -2111,27 +2111,37 @@
     "bookmarked_pages": [],
     "chat_messages": [
       {
-        "message_id": "user-1764309649297",
+        "message_id": "user-1764557190549",
         "role": "user",
         "content": "Annual turnover submitted by bidder evaluation sheet for Abhiraj.",
         "criteria_key": "1",
         "bidder_name": "Shraddha",
-        "created_at": "2025-11-28T06:00:49.297Z",
+        "created_at": "2025-12-01T02:46:30.549Z",
         "searchResults": [],
         "isLoading": false
       },
       {
-        "message_id": "user-1764309680106",
+        "message_id": "user-1764557224469",
         "role": "user",
         "content": "Annual turnover submitted by bidder evaluation sheet for Shraddha.",
         "criteria_key": "1",
         "bidder_name": "Shankar",
-        "created_at": "2025-11-28T06:01:20.106Z",
+        "created_at": "2025-12-01T02:47:04.469Z",
         "searchResults": [],
         "isLoading": false
+      },
+      {
+        "message_id": "loading-1764557224469",
+        "role": "assistant",
+        "content": "Searching for bidder evaluation sheet information...",
+        "criteria_key": "1",
+        "bidder_name": "Shankar",
+        "created_at": "2025-12-01T02:47:04.469Z",
+        "searchResults": [],
+        "isLoading": true
       }
     ],
-    "updated_at": "2025-11-28T06:02:37.564Z"
+    "updated_at": "2025-12-01T02:47:05.882Z"
   },
   "submitted_evidence": {
     "bid_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
@@ -2235,7 +2245,7 @@
               "cells": {
                 "turnover-2019-20": {
                   "value": "3110.00",
-                  "page_number": 336,
+                  "page_number": 808,
                   "metadata": {
                     "modified_by": "AI",
                     "modified_at": "2025-11-18T05:59:02.888Z"
@@ -2243,7 +2253,7 @@
                 },
                 "turnover-2020-21": {
                   "value": "2668.86",
-                  "page_number": 336,
+                  "page_number": 808,
                   "metadata": {
                     "modified_by": "AI",
                     "modified_at": "2025-11-18T05:59:02.888Z"
@@ -2251,7 +2261,7 @@
                 },
                 "turnover-2021-22": {
                   "value": "3491.45",
-                  "page_number": 336,
+                  "page_number": 808,
                   "metadata": {
                     "modified_by": "AI",
                     "modified_at": "2025-11-18T05:59:02.888Z"
@@ -2259,7 +2269,7 @@
                 },
                 "turnover-2022-23": {
                   "value": "4025.35",
-                  "page_number": 336,
+                  "page_number": 808,
                   "metadata": {
                     "modified_by": "AI",
                     "modified_at": "2025-11-18T05:59:02.888Z"
@@ -2267,7 +2277,7 @@
                 },
                 "turnover-2023-24": {
                   "value": "7520.72",
-                  "page_number": 336,
+                  "page_number": 808,
                   "metadata": {
                     "modified_by": "AI",
                     "modified_at": "2025-11-18T05:59:02.888Z"
@@ -2509,84 +2519,36 @@
         "created_at": "2025-11-18T06:06:11.319Z"
       },
       {
-        "bookmark_id": "bm-1-Abhiraj-36",
-        "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
-        "criteria_key": "1",
-        "bidder_name": "Abhiraj",
-        "page_number": 36,
-        "created_at": "2025-11-28T05:56:19.987Z"
-      },
-      {
         "bookmark_id": "bm-1-Abhiraj-111",
         "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
         "criteria_key": "1",
         "bidder_name": "Abhiraj",
         "page_number": 111,
-        "created_at": "2025-11-28T05:56:19.987Z"
+        "created_at": "2025-12-01T02:47:06.190Z"
       },
       {
-        "bookmark_id": "bm-1-Abhiraj-126",
+        "bookmark_id": "bm-1-Abhiraj-112",
         "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
         "criteria_key": "1",
         "bidder_name": "Abhiraj",
-        "page_number": 126,
-        "created_at": "2025-11-28T05:56:19.987Z"
+        "page_number": 112,
+        "created_at": "2025-12-01T02:47:06.190Z"
       },
       {
-        "bookmark_id": "bm-1-Abhiraj-127",
+        "bookmark_id": "bm-1-Abhiraj-337",
         "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
         "criteria_key": "1",
         "bidder_name": "Abhiraj",
-        "page_number": 127,
-        "created_at": "2025-11-28T05:56:19.987Z"
+        "page_number": 337,
+        "created_at": "2025-12-01T02:47:06.190Z"
       },
       {
-        "bookmark_id": "bm-1-Abhiraj-141",
+        "bookmark_id": "bm-1-Abhiraj-809",
         "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
         "criteria_key": "1",
         "bidder_name": "Abhiraj",
-        "page_number": 141,
-        "created_at": "2025-11-28T05:56:19.987Z"
-      },
-      {
-        "bookmark_id": "bm-1-Abhiraj-235",
-        "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
-        "criteria_key": "1",
-        "bidder_name": "Abhiraj",
-        "page_number": 235,
-        "created_at": "2025-11-28T05:56:19.987Z"
-      },
-      {
-        "bookmark_id": "bm-1-Abhiraj-244",
-        "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
-        "criteria_key": "1",
-        "bidder_name": "Abhiraj",
-        "page_number": 244,
-        "created_at": "2025-11-28T05:56:19.987Z"
-      },
-      {
-        "bookmark_id": "bm-1-Abhiraj-336",
-        "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
-        "criteria_key": "1",
-        "bidder_name": "Abhiraj",
-        "page_number": 336,
-        "created_at": "2025-11-28T05:56:19.987Z"
-      },
-      {
-        "bookmark_id": "bm-1-Abhiraj-602",
-        "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
-        "criteria_key": "1",
-        "bidder_name": "Abhiraj",
-        "page_number": 602,
-        "created_at": "2025-11-28T05:56:19.987Z"
-      },
-      {
-        "bookmark_id": "bm-1-Abhiraj-613",
-        "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
-        "criteria_key": "1",
-        "bidder_name": "Abhiraj",
-        "page_number": 613,
-        "created_at": "2025-11-28T05:56:19.987Z"
+        "page_number": 809,
+        "created_at": "2025-12-01T02:47:06.190Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-36",
@@ -2594,7 +2556,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 36,
-        "created_at": "2025-11-28T05:57:22.196Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-111",
@@ -2602,7 +2564,15 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 111,
-        "created_at": "2025-11-28T05:57:22.196Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
+      },
+      {
+        "bookmark_id": "bm-1-Shankar-112",
+        "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
+        "criteria_key": "1",
+        "bidder_name": "Shankar",
+        "page_number": 112,
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-126",
@@ -2610,7 +2580,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 126,
-        "created_at": "2025-11-28T05:57:22.196Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-127",
@@ -2618,7 +2588,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 127,
-        "created_at": "2025-11-28T05:57:22.196Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-141",
@@ -2626,7 +2596,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 141,
-        "created_at": "2025-11-28T05:57:22.196Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-235",
@@ -2634,7 +2604,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 235,
-        "created_at": "2025-11-28T05:57:22.196Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-244",
@@ -2642,7 +2612,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 244,
-        "created_at": "2025-11-28T05:57:22.196Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-312",
@@ -2650,7 +2620,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 312,
-        "created_at": "2025-11-28T05:57:22.196Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-325",
@@ -2658,7 +2628,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 325,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-336",
@@ -2666,7 +2636,15 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 336,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
+      },
+      {
+        "bookmark_id": "bm-1-Shankar-337",
+        "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
+        "criteria_key": "1",
+        "bidder_name": "Shankar",
+        "page_number": 337,
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-351",
@@ -2674,7 +2652,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 351,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-355",
@@ -2682,7 +2660,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 355,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-401",
@@ -2690,7 +2668,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 401,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-415",
@@ -2698,7 +2676,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 415,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-602",
@@ -2706,7 +2684,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 602,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-612",
@@ -2714,7 +2692,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 612,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-613",
@@ -2722,7 +2700,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 613,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-797",
@@ -2730,7 +2708,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 797,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-799",
@@ -2738,7 +2716,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 799,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-808",
@@ -2746,7 +2724,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 808,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-809",
@@ -2754,7 +2732,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 809,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-824",
@@ -2762,7 +2740,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 824,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-Shankar-826",
@@ -2770,7 +2748,7 @@
         "criteria_key": "1",
         "bidder_name": "Shankar",
         "page_number": 826,
-        "created_at": "2025-11-28T05:57:22.197Z"
+        "created_at": "2025-12-01T02:47:08.142Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-36",
@@ -2778,7 +2756,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 36,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-111",
@@ -2786,7 +2764,15 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 111,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
+      },
+      {
+        "bookmark_id": "bm-1-J.V.-112",
+        "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
+        "criteria_key": "1",
+        "bidder_name": "J.V.",
+        "page_number": 112,
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-126",
@@ -2794,7 +2780,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 126,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-127",
@@ -2802,7 +2788,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 127,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-141",
@@ -2810,7 +2796,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 141,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-235",
@@ -2818,7 +2804,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 235,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-244",
@@ -2826,7 +2812,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 244,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-312",
@@ -2834,7 +2820,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 312,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-325",
@@ -2842,7 +2828,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 325,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-336",
@@ -2850,7 +2836,15 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 336,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
+      },
+      {
+        "bookmark_id": "bm-1-J.V.-337",
+        "bid_evaluation_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
+        "criteria_key": "1",
+        "bidder_name": "J.V.",
+        "page_number": 337,
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-351",
@@ -2858,7 +2852,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 351,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-355",
@@ -2866,7 +2860,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 355,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-401",
@@ -2874,7 +2868,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 401,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-415",
@@ -2882,7 +2876,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 415,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-602",
@@ -2890,7 +2884,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 602,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-612",
@@ -2898,7 +2892,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 612,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-613",
@@ -2906,7 +2900,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 613,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-797",
@@ -2914,7 +2908,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 797,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-799",
@@ -2922,7 +2916,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 799,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-808",
@@ -2930,7 +2924,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 808,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-809",
@@ -2938,7 +2932,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 809,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-824",
@@ -2946,7 +2940,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 824,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       },
       {
         "bookmark_id": "bm-1-J.V.-826",
@@ -2954,7 +2948,7 @@
         "criteria_key": "1",
         "bidder_name": "J.V.",
         "page_number": 826,
-        "created_at": "2025-11-28T05:57:32.149Z"
+        "created_at": "2025-12-01T02:47:11.796Z"
       }
     ],
     "chat_messages": [
@@ -3090,6 +3084,6 @@
         "isLoading": false
       }
     ],
-    "updated_at": "2025-11-28T05:57:32.149Z"
+    "updated_at": "2025-12-01T02:47:11.796Z"
   }
 }

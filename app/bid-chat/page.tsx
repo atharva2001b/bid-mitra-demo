@@ -24,7 +24,9 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Send, Paperclip, FileText, X, BookOpen, Sparkles, Loader2 } from "lucide-react"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+// Load mock data
+import mockDocuments from "@/data/mock-documents.json"
+import mockSearchResults from "@/data/mock-search-results.json"
 
 interface Document {
   document_id: string
@@ -78,27 +80,25 @@ function BidChatContent() {
   const fetchDocuments = async () => {
     try {
       setLoadingDocs(true)
-      const response = await fetch(`${API_BASE_URL}/documents`)
-      if (response.ok) {
-        const data = await response.json()
-        // Map to include both document_name and page_count
-        const mappedDocs = (data.documents || []).map((doc: any) => ({
-          document_id: doc.document_id,
-          document_name: doc.document_name || doc.document_filename || "Bid Document",
-          total_pages: doc.total_pages || doc.page_count || 0,
-        }))
-        setDocuments(mappedDocs)
-        
-        // Set initial bid if provided
-        if (initialBidParam) {
-          const foundDoc = mappedDocs.find((d: Document) => d.document_id === initialBidParam)
-          if (foundDoc) {
-            setSelectedBid(initialBidParam)
-          }
+      // Use mock data instead of API call
+      const data = mockDocuments
+      // Map to include both document_name and page_count
+      const mappedDocs = (data.documents || []).map((doc: any) => ({
+        document_id: doc.document_id,
+        document_name: doc.document_name || doc.document_filename || "Bid Document",
+        total_pages: doc.total_pages || doc.page_count || 0,
+      }))
+      setDocuments(mappedDocs)
+      
+      // Set initial bid if provided
+      if (initialBidParam) {
+        const foundDoc = mappedDocs.find((d: Document) => d.document_id === initialBidParam)
+        if (foundDoc) {
+          setSelectedBid(initialBidParam)
         }
       }
     } catch (error) {
-      console.error("Error fetching documents:", error)
+      console.error("Error loading documents:", error)
     } finally {
       setLoadingDocs(false)
     }
@@ -131,61 +131,35 @@ function BidChatContent() {
     setInput("")
 
     try {
-      // Perform search
-      const payload: any = {
-        query: query,
-        n_results: 10,
-        document_id: selectedBid,
-      }
+      // Simulate search delay for demo
+      await new Promise(resolve => setTimeout(resolve, 800))
+      
+      // Use mock search results for demo chat
+      const data = mockSearchResults
+      const results = (data.results || []).map((r: any) => ({
+        ...r,
+        document_name:
+          r.document_name ||
+          documents.find((d) => d.document_id === r.document_id)?.document_name ||
+          selectedBidData?.document_name ||
+          "Bid Document",
+      }))
 
-      const response = await fetch(`${API_BASE_URL}/search`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        const results = (data.results || []).map((r: any) => ({
-          ...r,
-          document_name:
-            r.document_name ||
-            documents.find((d) => d.document_id === r.document_id)?.document_name ||
-            selectedBidData?.document_name ||
-            "Bid Document",
-        }))
-
-        // Update loading message with results
-        setMessages((prev) =>
-          prev.map((msg) =>
-            msg.id === loadingMessageId
-              ? {
-                  ...msg,
-                  content: results.length > 0
-                    ? `Found ${results.length} relevant result${results.length > 1 ? "s" : ""} from the document`
-                    : "No results found for your query",
-                  isLoading: false,
-                  searchResults: results,
-                }
-              : msg
-          )
+      // Update loading message with results
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === loadingMessageId
+            ? {
+                ...msg,
+                content: results.length > 0
+                  ? `Found ${results.length} relevant result${results.length > 1 ? "s" : ""} from the document`
+                  : "No results found for your query",
+                isLoading: false,
+                searchResults: results,
+              }
+            : msg
         )
-      } else {
-        // Update with error
-        setMessages((prev) =>
-          prev.map((msg) =>
-            msg.id === loadingMessageId
-              ? {
-                  ...msg,
-                  content: "Error searching documents. Please try again.",
-                  isLoading: false,
-                }
-              : msg
-          )
-        )
-      }
+      )
     } catch (error) {
       console.error("Error searching:", error)
       setMessages((prev) =>

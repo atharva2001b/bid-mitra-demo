@@ -75,18 +75,6 @@ const navigationItems: NavigationItem[] = [
     badge: null,
   },
   {
-    title: "Bid Chat",
-    icon: MessageSquare,
-    href: "/bid-chat",
-    badge: null,
-  },
-  {
-    title: "Search",
-    icon: Search,
-    href: "/search",
-    badge: null,
-  },
-  {
     title: "Reports",
     icon: BarChart3,
     href: "/reports",
@@ -96,12 +84,6 @@ const navigationItems: NavigationItem[] = [
   {
     title: "ACCOUNT",
     type: "header",
-  },
-  {
-    title: "My Account",
-    icon: Users,
-    href: "/account",
-    badge: null,
   },
   {
     title: "Billing",

@@ -1,0 +1,17 @@
+{
+  "total": 1,
+  "bids": [
+    {
+      "bid_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
+      "data_id": "data-f33817e8-a075-4547-8193-e63a2de6d04e",
+      "pdf_path": "/sample-bid.pdf",
+      "result": "{}",
+      "bid_name": "Abhiraj and Shraddha Joint Venture Bid",
+      "tender_id": "2581f451-0aca-4562-a8e9-a15791f5439d",
+      "created_at": "2025-01-15T10:00:00Z",
+      "updated_at": "2025-01-15T10:00:00Z"
+    }
+  ],
+  "timestamp": "2025-01-15T10:00:00Z"
+}
+

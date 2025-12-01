@@ -22,8 +22,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Loader2, Trash2 } from "lucide-react"
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+import mockBids from "@/data/mock-bids.json"
 
 interface Bid {
   bid_id: string
@@ -47,13 +46,11 @@ function BidsListContent() {
   const fetchBids = async () => {
     try {
       setLoading(true)
-      const response = await fetch(`${API_BASE_URL}/bids`)
-      if (response.ok) {
-        const data = await response.json()
-        setBids(data.bids || [])
-      }
+      // Use mock data instead of API call
+      const data = mockBids
+      setBids(data.bids || [])
     } catch (error) {
-      console.error("Error fetching bids:", error)
+      console.error("Error loading bids:", error)
     } finally {
       setLoading(false)
     }
@@ -70,19 +67,10 @@ function BidsListContent() {
 
     try {
       setDeleting(true)
-      const response = await fetch(`${API_BASE_URL}/bids/${bidToDelete.bid_id}`, {
-        method: "DELETE",
-      })
-
-      if (response.ok) {
-        // Remove the bid from the list
-        setBids(bids.filter((b) => b.bid_id !== bidToDelete.bid_id))
-        setDeleteDialogOpen(false)
-        setBidToDelete(null)
-      } else {
-        const errorData = await response.json()
-        alert(`Failed to delete bid: ${errorData.detail || "Unknown error"}`)
-      }
+      // In demo mode, just remove from local state
+      setBids(bids.filter((b) => b.bid_id !== bidToDelete.bid_id))
+      setDeleteDialogOpen(false)
+      setBidToDelete(null)
     } catch (error) {
       console.error("Error deleting bid:", error)
       alert("Failed to delete bid. Please try again.")

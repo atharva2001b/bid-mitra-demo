@@ -5,8 +5,8 @@ import Link from "next/link"
 import { AppLayout } from "@/components/app-layout"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, Loader2 } from "lucide-react"
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+import mockBids from "@/data/mock-bids.json"
+import mockTender from "@/data/mock-tender.json"
 
 interface Tender {
   tender_id: string
@@ -35,22 +35,11 @@ export default function DashboardPage() {
   const fetchData = async () => {
     try {
       setLoading(true)
-      const [tendersResponse, bidsResponse] = await Promise.all([
-        fetch(`${API_BASE_URL}/tenders`),
-        fetch(`${API_BASE_URL}/bids`)
-      ])
-
-      if (tendersResponse.ok) {
-        const tendersData = await tendersResponse.json()
-        setTenders(tendersData.tenders || [])
-      }
-
-      if (bidsResponse.ok) {
-        const bidsData = await bidsResponse.json()
-        setBids(bidsData.bids || [])
-      }
+      // Use mock data instead of API calls
+      setTenders([mockTender as Tender])
+      setBids(mockBids.bids as Bid[])
     } catch (error) {
-      console.error("Error fetching data:", error)
+      console.error("Error loading data:", error)
     } finally {
       setLoading(false)
     }

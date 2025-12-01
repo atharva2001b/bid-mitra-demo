@@ -21,8 +21,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Search, FileText, BookOpen, X, Sparkles, Loader2 } from "lucide-react"
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+import mockDocuments from "@/data/mock-documents.json"
+import mockSearchResults from "@/data/mock-search-results.json"
 
 interface Document {
   document_id: string
@@ -58,13 +58,11 @@ export default function SearchPage() {
   const fetchDocuments = async () => {
     try {
       setLoadingDocs(true)
-      const response = await fetch(`${API_BASE_URL}/documents`)
-      if (response.ok) {
-        const data = await response.json()
-        setDocuments(data.documents || [])
-      }
+      // Use mock data instead of API call
+      const data = mockDocuments
+      setDocuments(data.documents || [])
     } catch (error) {
-      console.error("Error fetching documents:", error)
+      console.error("Error loading documents:", error)
     } finally {
       setLoadingDocs(false)
     }
@@ -75,37 +73,20 @@ export default function SearchPage() {
 
     setLoading(true)
     try {
-      const payload: any = {
-        query: searchQuery,
-        n_results: 10,
-      }
-
-      if (selectedDocument && selectedDocument !== "all") {
-        payload.document_id = selectedDocument
-      }
-
-      const response = await fetch(`${API_BASE_URL}/search`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        setResults(
-          data.results?.map((r: any) => ({
-            ...r,
-            document_name:
+      // Simulate search delay for demo
+      await new Promise(resolve => setTimeout(resolve, 800))
+      
+      // Use mock search results for demo
+      const data = mockSearchResults
+      setResults(
+        data.results?.map((r: any) => ({
+          ...r,
+          document_name:
               r.document_name ||
               documents.find((d) => d.document_id === r.document_id)?.document_name ||
               "Unknown",
           })) || []
         )
-      } else {
-        console.error("Search failed:", await response.text())
-      }
     } catch (error) {
       console.error("Error searching:", error)
     } finally {

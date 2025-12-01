@@ -1,0 +1,9 @@
+{
+  "tender_id": "2581f451-0aca-4562-a8e9-a15791f5439d",
+  "name": "Kukadi Irrigation Project",
+  "pdf_path": "/sample-tender.pdf",
+  "evaluation_criteria_json": "{\"1\":{\"title\":\"Annual Turnover (updated to current year)\",\"value\":\"Rs lakhs\",\"requirement\":\"3106.13\",\"description\":\"5 year anual turnover ca certified.\"},\"2\":{\"title\":\"Bid Capacity = (AxNx2) - B\",\"value\":\"Rs lakhs\",\"requirement\":\"8283.00\",\"description\":\"bid capacity calculation page\"},\"3\":{\"title\":\"Completed Similar type of work\",\"value\":\"Rs lakhs\",\"requirement\":\"2484.90\",\"description\":\"similar type of work done.\"},\"4\":{\"title\":\"Quantities of Main Items Executed in any single year\",\"value\":\"\",\"requirement\":\"\",\"description\":\"general exprience table maximum amount of quantities executed table.\",\"subPoints\":{\"4.a\":{\"title\":\"Concrete Lining\",\"value\":\"Cum\",\"requirement\":\"16910\",\"description\":\"\"},\"4.b\":{\"title\":\"Steel Reinforcement\",\"value\":\"MT\",\"requirement\":\"431\",\"description\":\"\"},\"4.c\":{\"title\":\"Earthwork\",\"value\":\"Cum\",\"requirement\":\"60490\",\"description\":\"\"}}}}",
+  "bid_ids": "[\"f33817e8-a075-4547-8193-e63a2de6d04e\"]",
+  "created_at": "2025-01-15T10:00:00Z",
+  "updated_at": "2025-01-15T10:00:00Z"
+}

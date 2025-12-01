@@ -28,8 +28,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Edit, RefreshCw, MessageSquare, Info, ArrowDown, ArrowRight, Upload, Loader2, Plus, Trash2, Save, X, FileText, Eye, BookOpen, Sparkles, ChevronUp, ChevronDown, PlayCircle, CheckCircle } from "lucide-react"
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+import mockTender from "@/data/mock-tender.json"
+import mockBids from "@/data/mock-bids.json"
 
 interface Tender {
   tender_id: string
@@ -57,16 +57,14 @@ export default function TenderDetailPage() {
     try {
       setLoading(true)
       setError(null)
-      const response = await fetch(`${API_BASE_URL}/tenders/${tenderId}`)
-      if (response.ok) {
-        const data = await response.json()
-        setTender(data)
+      // Use mock data instead of API call
+      if (tenderId === mockTender.tender_id) {
+        setTender(mockTender as Tender)
       } else {
-        const errorText = await response.text()
-        setError(errorText || "Failed to load tender")
+        setError("Tender not found")
       }
     } catch (err) {
-      console.error("Error fetching tender:", err)
+      console.error("Error loading tender:", err)
       setError("An error occurred while loading the tender")
     } finally {
       setLoading(false)
@@ -202,28 +200,16 @@ export default function TenderDetailPage() {
         console.log("🔄 Prefilling default evaluation criteria")
         setEditingCriteria(defaultCriteria)
         
-        // Auto-save the prefilled criteria
+        // Auto-save the prefilled criteria (demo mode - just update local state)
         const savePrefilledCriteria = async () => {
           try {
             const criteriaJsonString = JSON.stringify(defaultCriteria)
-            const response = await fetch(`${API_BASE_URL}/tenders/${tenderId}`, {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                evaluation_criteria_json: criteriaJsonString,
-              }),
-            })
-
-            if (response.ok) {
-              const updatedTender = await response.json()
-              setTender(updatedTender)
-              console.log("✅ Prefilled evaluation criteria saved automatically")
-            } else {
-              const errorText = await response.text()
-              console.error("❌ Failed to save prefilled criteria:", errorText)
+            const updatedTender = { 
+              ...tender, 
+              evaluation_criteria_json: criteriaJsonString 
             }
+            setTender(updatedTender)
+            console.log("✅ Prefilled evaluation criteria updated (demo mode)")
           } catch (err) {
             console.error("❌ Error auto-saving prefilled criteria:", err)
           }
@@ -266,28 +252,16 @@ export default function TenderDetailPage() {
         
         setEditingCriteria(migratedCriteria)
         
-        // Auto-save the migrated criteria
+        // Auto-save the migrated criteria (demo mode - just update local state)
         const saveMigratedCriteria = async () => {
           try {
             const criteriaJsonString = JSON.stringify(migratedCriteria)
-            const response = await fetch(`${API_BASE_URL}/tenders/${tenderId}`, {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                evaluation_criteria_json: criteriaJsonString,
-              }),
-            })
-
-            if (response.ok) {
-              const updatedTender = await response.json()
-              setTender(updatedTender)
-              console.log("✅ Migrated evaluation criteria saved automatically")
-            } else {
-              const errorText = await response.text()
-              console.error("❌ Failed to save migrated criteria:", errorText)
+            const updatedTender = { 
+              ...tender, 
+              evaluation_criteria_json: criteriaJsonString 
             }
+            setTender(updatedTender)
+            console.log("✅ Migrated evaluation criteria updated (demo mode)")
           } catch (err) {
             console.error("❌ Error auto-saving migrated criteria:", err)
           }
@@ -312,24 +286,10 @@ export default function TenderDetailPage() {
     setError(null)
     
     try {
-      const response = await fetch(`${API_BASE_URL}/tenders/${tenderId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: editingTenderName.trim(),
-        }),
-      })
-
-      if (response.ok) {
-        const updatedTender = await response.json()
-        setTender(updatedTender)
-        setIsEditNameDialogOpen(false)
-      } else {
-        const errorText = await response.text()
-        setError(errorText || "Failed to update tender name")
-      }
+      // In demo mode, just update local state
+      const updatedTender = { ...tender, name: editingTenderName.trim() }
+      setTender(updatedTender)
+      setIsEditNameDialogOpen(false)
     } catch (err) {
       console.error("❌ Error updating tender name:", err)
       setError("An error occurred while updating tender name")
@@ -358,24 +318,11 @@ export default function TenderDetailPage() {
     
     setLoadingBids(true)
     try {
-      const bidsPromises = bidIds.map(async (bidId: string) => {
-        try {
-          const response = await fetch(`${API_BASE_URL}/bids/${bidId}`)
-          if (response.ok) {
-            return await response.json()
-          }
-          return null
-        } catch (err) {
-          console.error(`Error fetching bid ${bidId}:`, err)
-          return null
-        }
-      })
-      
-      const bidsData = await Promise.all(bidsPromises)
-      const validBids = bidsData.filter(bid => bid !== null && !bid.error)
+      // Use mock data instead of API calls
+      const validBids = mockBids.bids.filter(bid => bidIds.includes(bid.bid_id))
       setBids(validBids)
     } catch (err) {
-      console.error("Error fetching bids:", err)
+      console.error("Error loading bids:", err)
       setBids([])
     } finally {
       setLoadingBids(false)
@@ -388,43 +335,10 @@ export default function TenderDetailPage() {
     setIsBidViewDialogOpen(true)
     
     try {
-      const response = await fetch(`${API_BASE_URL}/bids/${bid.bid_id}/data`)
-      if (response.ok) {
-        const data = await response.json()
-        
-        // Ensure chunks is an array
-        const chunks = Array.isArray(data.chunks) ? data.chunks : []
-        
-        if (chunks.length === 0) {
-          setBidData([])
-          return
-        }
-        
-        // Group by page_no
-        const groupedByPage = chunks.reduce((acc: any, chunk: any) => {
-          const pageNo = chunk.page_no || "0"
-          if (!acc[pageNo]) {
-            acc[pageNo] = {
-              page_no: pageNo,
-              chunks: []
-            }
-          }
-          acc[pageNo].chunks.push(chunk)
-          return acc
-        }, {})
-        
-        // Convert to array and sort by page number
-        const pages = Object.values(groupedByPage).sort((a: any, b: any) => {
-          return parseInt(a.page_no) - parseInt(b.page_no)
-        })
-        
-        setBidData(pages as any)
-      } else {
-        console.error("Failed to fetch bid data:", response.statusText)
-        setBidData([])
-      }
+      // In demo mode, show empty bid data (or you could use mock data)
+      setBidData([])
     } catch (err) {
-      console.error("Error fetching bid data:", err)
+      console.error("Error loading bid data:", err)
       setBidData([])
     } finally {
       setLoadingBidData(false)
@@ -432,14 +346,12 @@ export default function TenderDetailPage() {
   }
 
   const handleViewPdf = (pdfPath: string) => {
-    // Create a URL for the PDF file
+    // Use local PDF path from public folder
     let fullUrl = pdfPath
     if (!pdfPath.startsWith('http')) {
-      // If it's a relative path, construct the full URL
-      if (pdfPath.startsWith('/')) {
-        fullUrl = `${API_BASE_URL}${pdfPath}`
-      } else {
-        fullUrl = `${API_BASE_URL}/${pdfPath}`
+      // If it's a relative path, use it directly (served from public folder)
+      if (!pdfPath.startsWith('/')) {
+        fullUrl = `/${pdfPath}`
       }
     }
     setPdfUrl(fullUrl)
@@ -453,44 +365,16 @@ export default function TenderDetailPage() {
     setError(null)
     
     try {
-      // Convert editingCriteria to JSON string for persistence
+      // In demo mode, just update local state
       const criteriaJsonString = JSON.stringify(editingCriteria)
-      console.log("💾 Saving evaluation criteria:", {
-        tenderId,
-        criteriaLength: criteriaJsonString.length,
-        criteriaPreview: criteriaJsonString.substring(0, 100) + "..."
-      })
-
-      const response = await fetch(`${API_BASE_URL}/tenders/${tenderId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          evaluation_criteria_json: criteriaJsonString, // Store as JSON string
-        }),
-      })
-
-      if (response.ok) {
-        const updatedTender = await response.json()
-        console.log("✅ Criteria saved successfully:", updatedTender)
-        
-        // Update local state with the saved data
-        setTender(updatedTender)
-        
-        // Parse and update editing criteria to match saved data
-        const savedCriteria = JSON.parse(updatedTender.evaluation_criteria_json || "{}")
-        setEditingCriteria(savedCriteria)
-        setIsEditing(false)
-        setViewMode("table") // Switch to table view after saving
-        
-        // Show success message (optional - you can add a toast notification here)
-        console.log("✅ Evaluation criteria persisted to ChromaDB")
-      } else {
-        const errorText = await response.text()
-        console.error("❌ Failed to save criteria:", errorText)
-        setError(errorText || "Failed to save criteria")
+      const updatedTender = { 
+        ...tender, 
+        evaluation_criteria_json: criteriaJsonString 
       }
+      setTender(updatedTender)
+      setIsEditing(false)
+      setViewMode("table")
+      console.log("✅ Evaluation criteria updated (demo mode)")
     } catch (err) {
       console.error("❌ Error saving criteria:", err)
       setError("An error occurred while saving criteria")
@@ -817,58 +701,13 @@ export default function TenderDetailPage() {
     setUploadError(null)
 
     try {
-      const formData = new FormData()
-      formData.append("pdf_file", bidPdfFile)
-      if (bidCsvFile) {
-        formData.append("csv_file", bidCsvFile)
-      }
-      formData.append("bid_name", bidName.trim())
-      if (tenderId) {
-        formData.append("tender_id", tenderId)
-      }
-
-      const response = await fetch(`${API_BASE_URL}/bids/upload`, {
-        method: "POST",
-        body: formData,
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        console.log("✅ Bid uploaded successfully:", data)
-        
-        // Update tender's bid_ids
-        const currentBidIds = JSON.parse(tender?.bid_ids || "[]")
-        const updatedBidIds = [...currentBidIds, data.bid_id]
-        
-        // Update tender with new bid_id
-        const updateResponse = await fetch(`${API_BASE_URL}/tenders/${tenderId}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            bid_ids: JSON.stringify(updatedBidIds),
-          }),
-        })
-
-        if (updateResponse.ok) {
-          // Refresh tender data
-          await fetchTender()
-          
-          // Reset form
-          setBidName("")
-          setBidPdfFile(null)
-          setBidCsvFile(null)
-          setIsUploadDialogOpen(false)
-          setUploadError(null)
-        } else {
-          const errorText = await updateResponse.text()
-          setUploadError(`Bid uploaded but failed to link to tender: ${errorText}`)
-        }
-      } else {
-        const errorText = await response.text()
-        setUploadError(errorText || "Failed to upload bid")
-      }
+      // In demo mode, uploads are not supported
+      alert("Upload functionality is not available in independent frontend mode. This is a demo version with mock data.")
+      setIsUploadDialogOpen(false)
+      setBidName("")
+      setBidPdfFile(null)
+      setBidCsvFile(null)
+      setUploadError(null)
     } catch (err) {
       console.error("❌ Error uploading bid:", err)
       setUploadError("An error occurred while uploading the bid")
@@ -1141,10 +980,9 @@ export default function TenderDetailPage() {
                         src={(() => {
                           let fullUrl = tender.pdf_path
                           if (!fullUrl.startsWith('http')) {
-                            if (fullUrl.startsWith('/')) {
-                              fullUrl = `${API_BASE_URL}${fullUrl}`
-                            } else {
-                              fullUrl = `${API_BASE_URL}/${fullUrl}`
+                            // Use local PDF path from public folder
+                            if (!fullUrl.startsWith('/')) {
+                              fullUrl = `/${fullUrl}`
                             }
                           }
                           return fullUrl

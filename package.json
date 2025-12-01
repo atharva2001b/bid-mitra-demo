@@ -1,5 +1,5 @@
 {
-  "name": "bid-mitra",
+  "name": "bid-mitra-frontend-ind",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -29,7 +29,7 @@
     "exceljs": "^4.4.0",
     "lucide-react": "^0.552.0",
     "next": "16.0.1",
-    "pdfjs-dist": "^5.4.394",
+    "pdfjs-dist": "^3.11.174",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "tailwind-merge": "^3.3.1",

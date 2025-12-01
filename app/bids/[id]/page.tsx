@@ -50,8 +50,9 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import ExcelJS from "exceljs"
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+import mockBids from "@/data/mock-bids.json"
+import mockTender from "@/data/mock-tender.json"
+import mockSearchResults from "@/data/mock-search-results.json"
 
 const TURNOVER_YEARS = ["2019-20", "2020-21", "2021-22", "2022-23", "2023-24"]
 const YEAR_LABELS = ["V", "IV", "III", "II", "I"] // Reverse chronological order
@@ -549,24 +550,15 @@ function Bids4CockpitContent() {
     // Send initial RAG query
     if (bidId) {
       try {
-        const response = await fetch(`${API_BASE_URL}/bids/${bidId}/search`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            query: initialPrompt,
-            n_results: 10,
-          }),
-        })
+        // Use mock search results for demo
+        await new Promise(resolve => setTimeout(resolve, 500))
+        const data = mockSearchResults
         
         let results: SearchResult[] = []
-        if (response.ok) {
-          const data = await response.json()
-          results = (data.results || []).map((r: any) => ({
-            ...r,
-            document_name: bid?.bid_name || "Bid Document",
-          }))
+        results = (data.results || []).map((r: any) => ({
+          ...r,
+          document_name: bid?.bid_name || "Bid Document",
+        }))
           
           // Add RAG result pages to bookmarks (only for submitted_evidence mode)
           // For bidder_evaluation mode, don't auto-bookmark RAG results
@@ -619,7 +611,6 @@ function Bids4CockpitContent() {
             // saveCellData will use the current messages state which includes user message
             saveCellData(bidderName, pagesToSave)
           }, 500)
-        }
       } catch (error) {
         console.error("Error initializing partner data:", error)
         // Update loading message with error - formatted properly
@@ -1292,32 +1283,30 @@ function Bids4CockpitContent() {
       
       // Step 1: Loading bid data
       await new Promise(resolve => setTimeout(resolve, 300))
-      const bidResponse = await fetch(`${API_BASE_URL}/bids/${bidId}`)
-      if (bidResponse.ok) {
-        const bidData = await bidResponse.json()
+      // Use mock data instead of API call
+      const bidData = mockBids.bids.find(b => b.bid_id === bidId) || mockBids.bids[0]
+      if (bidData) {
         setBid(bidData)
         setLoadingSteps(prev => ({ ...prev, "Loading bid data": true }))
         
         // Step 2: Fetching evaluation criteria
         await new Promise(resolve => setTimeout(resolve, 400))
         if (bidData.tender_id) {
-          const tenderResponse = await fetch(`${API_BASE_URL}/tenders/${bidData.tender_id}`)
-          if (tenderResponse.ok) {
-            const tenderData = await tenderResponse.json()
-            setTender(tenderData)
-            
-            const criteriaJson = JSON.parse(tenderData.evaluation_criteria_json || "{}")
-            setCriteria(criteriaJson)
-            setLoadingSteps(prev => ({ ...prev, "Fetching evaluation criteria": true }))
-            
-            // Set first criteria as selected
-            const firstKey = Object.keys(criteriaJson).sort((a, b) => {
-              const numA = parseInt(a) || 0
-              const numB = parseInt(b) || 0
-              return numA - numB
-            })[0]
-            if (firstKey) setSelectedCriteria(firstKey)
-          }
+          // Use mock tender data
+          const tenderData = mockTender
+          setTender(tenderData)
+          
+          const criteriaJson = JSON.parse(tenderData.evaluation_criteria_json || "{}")
+          setCriteria(criteriaJson)
+          setLoadingSteps(prev => ({ ...prev, "Fetching evaluation criteria": true }))
+          
+          // Set first criteria as selected
+          const firstKey = Object.keys(criteriaJson).sort((a, b) => {
+            const numA = parseInt(a) || 0
+            const numB = parseInt(b) || 0
+            return numA - numB
+          })[0]
+          if (firstKey) setSelectedCriteria(firstKey)
         }
         
         // Step 3: Initializing partner data
@@ -1352,9 +1341,12 @@ function Bids4CockpitContent() {
   }
   
   const loadPdfInfo = async (pdfPath: string) => {
+    // Use local PDF path from public folder
     const fullUrl = pdfPath.startsWith('http') 
       ? pdfPath 
-      : `${API_BASE_URL}/${pdfPath}`
+      : pdfPath.startsWith('/') 
+        ? pdfPath 
+        : `/${pdfPath}`
     
     setPdfUrl(fullUrl)
     
@@ -1507,26 +1499,15 @@ function Bids4CockpitContent() {
     setInput("")
 
     try {
-      // RAG Search
-      const response = await fetch(`${API_BASE_URL}/bids/${bidId}/search`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          query: query,
-          n_results: 10,
-        }),
-      })
+      // Use mock search results for demo
+      await new Promise(resolve => setTimeout(resolve, 800))
+      const data = mockSearchResults
 
       let results: SearchResult[] = []
-      if (response.ok) {
-        const data = await response.json()
-        results = (data.results || []).map((r: any) => ({
-          ...r,
-          document_name: bid?.bid_name || "Bid Document",
-        }))
-      }
+      results = (data.results || []).map((r: any) => ({
+        ...r,
+        document_name: bid?.bid_name || "Bid Document",
+      }))
 
       // Update message with RAG results
       setMessages(prev => prev.map(msg =>
