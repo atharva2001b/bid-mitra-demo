@@ -296,7 +296,7 @@ function BidChatContent() {
                     <div className="text-center py-12">
                       <FileText className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
                       <h3 className="text-lg font-semibold mb-2">
-                        Start chatting about {selectedBidData?.name}
+                        Start chatting about {selectedBidData?.document_name}
                       </h3>
                       <p className="text-muted-foreground">
                         Ask questions about the bid document, requirements, pricing, or any other
