@@ -423,7 +423,7 @@ function Bids4CockpitContent() {
         }
         
         // Only clear if messages don't have a user message (meaning they're stale)
-        const hasUserMessage = prev.some(msg => msg.role === "user")
+        const hasUserMessage = prev.some((msg: Message) => msg.role === "user")
         if (!hasUserMessage) {
           return []
         }
@@ -592,8 +592,8 @@ function Bids4CockpitContent() {
             ? `Annual turnover submitted by bidder evaluation sheet for ${partnerName}.\n\nFound ${results.length} relevant result${results.length > 1 ? "s" : ""} from the bid document.`
             : `Annual turnover for ${partnerName} certified by CA.\n\nFound ${results.length} relevant result${results.length > 1 ? "s" : ""} from the bid document.`
           setMessages(prev => {
-            console.log("📝 Updating messages - current messages:", prev.map(m => ({ id: m.id, role: m.role, content: m.content.substring(0, 50) })))
-            return prev.map(msg =>
+            console.log("📝 Updating messages - current messages:", prev.map((m: Message) => ({ id: m.id, role: m.role, content: m.content.substring(0, 50) })))
+            return prev.map((msg: Message) =>
               msg.id === loadingMessageId
                 ? {
                     ...msg,
@@ -620,7 +620,7 @@ function Bids4CockpitContent() {
         const errorMessage = evaluationMode === "bidder_evaluation"
           ? `Annual turnover submitted by bidder evaluation sheet for ${partnerName}.\n\nError searching documents. Please try again.`
           : `Annual turnover for ${partnerName} certified by CA.\n\nError searching documents. Please try again.`
-        setMessages(prev => prev.map(msg =>
+        setMessages(prev => prev.map((msg: Message) =>
           msg.id === loadingMessageId
             ? {
                 ...msg,
@@ -1017,7 +1017,7 @@ function Bids4CockpitContent() {
               })
               
               // Check if user message exists - if not, we need to initialize
-              const hasUserMessage = loadedMessages.some(msg => msg.role === "user")
+              const hasUserMessage = loadedMessages.some((msg: Message) => msg.role === "user")
               
               if (!hasUserMessage || !messagesForCorrectPartner) {
                 console.log("⚠️ Messages don't match partner or missing user message, re-initializing...", {
@@ -1197,7 +1197,7 @@ function Bids4CockpitContent() {
       // Only save messages if they are for the correct bidder
       // Check message content to ensure it matches the bidder name
       // IMPORTANT: Don't filter out user messages - they are the initial queries
-      const validMessages = messages.filter(msg => {
+      const validMessages = messages.filter((msg: Message) => {
         // Always include user messages (they are the queries)
         if (msg.role === "user") {
           return true

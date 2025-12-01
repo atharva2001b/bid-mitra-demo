@@ -211,14 +211,14 @@ export default function TasksPage() {
   const handleEditTask = () => {
     if (!editingTask || !formData.title.trim() || !formData.dueDate) return
 
-    const updatedTasks = tasks.map(t =>
+    const updatedTasks: Task[] = tasks.map(t =>
       t.id === editingTask.id
         ? {
             ...t,
             title: formData.title,
             subtitle: formData.subtitle,
             dueDate: formatDate(new Date(formData.dueDate)),
-            priority: formData.priority === "High Priority" ? "High Priority" : null,
+            priority: formData.priority === "High Priority" ? ("High Priority" as const) : null,
             priorityColor: formData.priority === "High Priority" ? "bg-red-100 text-red-800" : null,
           }
         : t
