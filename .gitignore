@@ -40,5 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Large PDF files (add manually or use Git LFS)
-public/*.pdf
+# Note: PDF files in public/ are included for deployment
+# If files exceed 100MB, use Git LFS or host externally
