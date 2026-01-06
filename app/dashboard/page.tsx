@@ -192,7 +192,7 @@ export default function DashboardPage() {
               <CardTitle className="text-sm font-medium text-slate-500">Total Bid pages done</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-semibold tracking-tight text-slate-900">939
+              <div className="text-2xl font-semibold tracking-tight text-slate-900">820
               </div>
             </CardContent>
           </Card>

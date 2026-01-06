@@ -82,19 +82,19 @@ function BidChatContent() {
       setLoadingDocs(true)
       // Use mock data instead of API call
       const data = mockDocuments
-      // Map to include both document_name and page_count
-      const mappedDocs = (data.documents || []).map((doc: any) => ({
-        document_id: doc.document_id,
-        document_name: doc.document_name || doc.document_filename || "Bid Document",
-        total_pages: doc.total_pages || doc.page_count || 0,
-      }))
-      setDocuments(mappedDocs)
-      
-      // Set initial bid if provided
-      if (initialBidParam) {
-        const foundDoc = mappedDocs.find((d: Document) => d.document_id === initialBidParam)
-        if (foundDoc) {
-          setSelectedBid(initialBidParam)
+        // Map to include both document_name and page_count
+        const mappedDocs = (data.documents || []).map((doc: any) => ({
+          document_id: doc.document_id,
+          document_name: doc.document_name || doc.document_filename || "Bid Document",
+          total_pages: doc.total_pages || doc.page_count || 0,
+        }))
+        setDocuments(mappedDocs)
+        
+        // Set initial bid if provided
+        if (initialBidParam) {
+          const foundDoc = mappedDocs.find((d: Document) => d.document_id === initialBidParam)
+          if (foundDoc) {
+            setSelectedBid(initialBidParam)
         }
       }
     } catch (error) {
@@ -136,30 +136,30 @@ function BidChatContent() {
       
       // Use mock search results for demo chat
       const data = mockSearchResults
-      const results = (data.results || []).map((r: any) => ({
-        ...r,
-        document_name:
-          r.document_name ||
-          documents.find((d) => d.document_id === r.document_id)?.document_name ||
-          selectedBidData?.document_name ||
-          "Bid Document",
-      }))
+        const results = (data.results || []).map((r: any) => ({
+          ...r,
+          document_name:
+            r.document_name ||
+            documents.find((d) => d.document_id === r.document_id)?.document_name ||
+            selectedBidData?.document_name ||
+            "Bid Document",
+        }))
 
-      // Update loading message with results
-      setMessages((prev) =>
-        prev.map((msg) =>
-          msg.id === loadingMessageId
-            ? {
-                ...msg,
-                content: results.length > 0
-                  ? `Found ${results.length} relevant result${results.length > 1 ? "s" : ""} from the document`
-                  : "No results found for your query",
-                isLoading: false,
-                searchResults: results,
-              }
-            : msg
+        // Update loading message with results
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === loadingMessageId
+              ? {
+                  ...msg,
+                  content: results.length > 0
+                    ? `Found ${results.length} relevant result${results.length > 1 ? "s" : ""} from the document`
+                    : "No results found for your query",
+                  isLoading: false,
+                  searchResults: results,
+                }
+              : msg
+          )
         )
-      )
     } catch (error) {
       console.error("Error searching:", error)
       setMessages((prev) =>

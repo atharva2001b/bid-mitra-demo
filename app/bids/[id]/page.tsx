@@ -183,9 +183,96 @@ function Bids4CockpitContent() {
   
   const bidderNames = getBidderNames()
   
-  // Partner data structure - stores data for each partner
-  // Initialize empty - data will be loaded from JSON file
-  const [partnerData, setPartnerData] = useState<Record<string, Record<string, CellData>>>({})
+  // Hardcoded default data for both modes
+  const getDefaultPartnerData = (mode: "bidder_evaluation" | "submitted_evidence"): Record<string, Record<string, CellData>> => {
+    const pageNumber = mode === "bidder_evaluation" ? 27 : undefined
+    return {
+      "Abhiraj": {
+        "turnover-2019-20": {
+          value: "2343.24",
+          page_number: pageNumber || 111,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        },
+        "turnover-2020-21": {
+          value: "5956.07",
+          page_number: pageNumber || 111,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        },
+        "turnover-2021-22": {
+          value: "1165.00",
+          page_number: pageNumber || 111,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        },
+        "turnover-2022-23": {
+          value: "3814.51",
+          page_number: pageNumber || 111,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        },
+        "turnover-2023-24": {
+          value: "9084.83",
+          page_number: pageNumber || 111,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        }
+      },
+      "Shraddha": {
+        "turnover-2019-20": {
+          value: "3110.00",
+          page_number: pageNumber || 336,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        },
+        "turnover-2020-21": {
+          value: "2668.86",
+          page_number: pageNumber || 336,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        },
+        "turnover-2021-22": {
+          value: "3491.45",
+          page_number: pageNumber || 336,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        },
+        "turnover-2022-23": {
+          value: "4025.35",
+          page_number: pageNumber || 336,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        },
+        "turnover-2023-24": {
+          value: "7520.72",
+          page_number: pageNumber || 336,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        }
+      },
+      "Shankar": {
+        "turnover-2019-20": {
+          value: "889.43",
+          page_number: pageNumber || 808,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        },
+        "turnover-2020-21": {
+          value: "1341.21",
+          page_number: pageNumber || 808,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        },
+        "turnover-2021-22": {
+          value: "2047.84",
+          page_number: pageNumber || 808,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        },
+        "turnover-2022-23": {
+          value: "1818.74",
+          page_number: pageNumber || 808,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        },
+        "turnover-2023-24": {
+          value: "1600.00",
+          page_number: pageNumber || 808,
+          metadata: { modified_by: "AI", modified_at: new Date().toISOString() }
+        }
+      }
+    }
+  }
+
+  // Partner data structure - initialized with hardcoded default data
+  const [partnerData, setPartnerData] = useState<Record<string, Record<string, CellData>>>(getDefaultPartnerData("bidder_evaluation"))
   
   // J.V. master table data - ALWAYS computed from partner tables
   // Multiplying factors for each year
@@ -290,8 +377,14 @@ function Bids4CockpitContent() {
   
   // Sync cellData, messages, and bookmarks when selectedBidder changes
   useEffect(() => {
-    // Clear bookmarks immediately when partner changes to prevent showing previous partner's bookmarks
-    setBookmarkedPages([])
+    // Set bookmarks based on mode when partner changes
+    // For bidder_evaluation mode, always bookmark page 27 for all JV members
+    if (evaluationMode === "bidder_evaluation") {
+      setBookmarkedPages([27])
+    } else {
+      // Clear bookmarks for submitted_evidence mode (will be set by initializePartnerData)
+      setBookmarkedPages([])
+    }
     // Clear messages immediately when partner changes to prevent showing previous partner's messages
     setMessages([])
     
@@ -380,12 +473,19 @@ function Bids4CockpitContent() {
       loadCellData(true)
       setHasLoadedInitialData(true)
     } else if (bid && tender) {
-      // When mode changes, reset initialization flags to force reinitialization
+      // When mode changes, update partnerData with correct hardcoded data for the new mode
+      const defaultData = getDefaultPartnerData(evaluationMode)
+      setPartnerData(defaultData)
+      
+      // Update cellData for selected bidder
+      if (selectedBidder !== "J.V." && defaultData[selectedBidder]) {
+        setCellData(defaultData[selectedBidder])
+      }
+      
+      // Reset initialization flags when mode changes
       const partnerKey = `${selectedCriteria}-${selectedBidder}-${evaluationMode}`
       setHasInitializedPartner(prev => {
-        // Reset all initialization flags for this partner when mode changes
         const newState = { ...prev }
-        // Remove old mode flags for this partner to force reinitialization
         Object.keys(newState).forEach(key => {
           if (key.startsWith(`${selectedCriteria}-${selectedBidder}-`) && key !== partnerKey) {
             delete newState[key]
@@ -393,14 +493,20 @@ function Bids4CockpitContent() {
         })
         return newState
       })
-      // Clear messages when mode/criteria changes to force reload with new mode-specific data
-      // When partner changes, messages are already cleared in the selectedBidder useEffect
-      // Only clear here if partner hasn't changed (to avoid double clearing)
+      
+      // Set bookmarks based on mode when mode changes
+      // For bidder_evaluation mode, always bookmark page 27 for all JV members
+      if (evaluationMode === "bidder_evaluation") {
+        setBookmarkedPages([27])
+      } else {
+        // For submitted_evidence mode, clear bookmarks (will be set by initializePartnerData)
+        setBookmarkedPages([])
+      }
+      
+      // Clear messages when mode/criteria changes
       setMessages(prev => {
-        // Check if current messages are for a different partner
         let currentBidderInMessages: string | null = null
         for (const msg of prev) {
-          // Try to extract bidder name from message content
           if (msg.content) {
             if (msg.content.includes("Abhiraj") && !msg.content.includes("Shraddha") && !msg.content.includes("Shankar")) {
               currentBidderInMessages = "Abhiraj"
@@ -417,19 +523,18 @@ function Bids4CockpitContent() {
           }
         }
         
-        // If messages are for a different partner, clear them
         if (currentBidderInMessages && currentBidderInMessages !== selectedBidder) {
           return []
         }
         
-        // Only clear if messages don't have a user message (meaning they're stale)
         const hasUserMessage = prev.some((msg: Message) => msg.role === "user")
         if (!hasUserMessage) {
           return []
         }
         return prev
       })
-      // Reload cell data when switching between partners, criteria, or modes (including J.V.)
+      
+      // Reload cell data when switching between partners, criteria, or modes
       loadCellData(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -458,13 +563,19 @@ function Bids4CockpitContent() {
   
   // Initialize partner with RAG prompt and bookmarks
   const initializePartnerData = async (bidderName: string) => {
-    // For bidder_evaluation mode, don't add any default pages - keep bookmarks empty
+    // For bidder_evaluation mode, add page 27 for all JV members
     let currentBookmarkedPages: number[] = []
     
     if (evaluationMode === "bidder_evaluation") {
-      // Keep bookmarks empty for bidder_evaluation mode
-      setBookmarkedPages([])
-      currentBookmarkedPages = []
+      // For bidder_evaluation mode, always bookmark page 27 for all JV members
+      if (bidderName === "J.V.") {
+        // For J.V., bookmark page 27 (it's the same page for all members)
+        currentBookmarkedPages = [27]
+      } else {
+        // For individual members, bookmark page 27
+        currentBookmarkedPages = [27]
+      }
+      setBookmarkedPages(currentBookmarkedPages)
     } else {
       // Get required pages for this partner (only for submitted_evidence mode)
       let requiredPages: number[] = []
@@ -558,18 +669,18 @@ function Bids4CockpitContent() {
         const data = mockSearchResults
         
         let results: SearchResult[] = []
-        results = (data.results || []).map((r: any) => ({
-          ...r,
-          document_name: bid?.bid_name || "Bid Document",
-        }))
+          results = (data.results || []).map((r: any) => ({
+            ...r,
+            document_name: bid?.bid_name || "Bid Document",
+          }))
           
           // Add RAG result pages to bookmarks (only for submitted_evidence mode)
-          // For bidder_evaluation mode, don't auto-bookmark RAG results
+          // For bidder_evaluation mode, keep page 27 bookmarked
           let finalPages: number[] = []
           if (evaluationMode === "bidder_evaluation") {
-            // Keep bookmarks empty - user will manually select pages
-            setBookmarkedPages([])
-            finalPages = []
+            // Keep page 27 bookmarked for bidder_evaluation mode
+            finalPages = [27]
+            setBookmarkedPages(finalPages)
           } else {
             // Add RAG result pages to bookmarks (only if not already present)
             const ragPages = results.map(r => parseInt(r.page_no) + 1).filter((p, i, arr) => arr.indexOf(p) === i)
@@ -607,9 +718,9 @@ function Bids4CockpitContent() {
           
           // Save after initialization - pass final pages directly to avoid race condition
           // Pass bidderName explicitly to ensure correct bidder_name is saved
-          // For bidder_evaluation, save empty array; for submitted_evidence, save finalPages
+          // For bidder_evaluation, save page 27; for submitted_evidence, save finalPages
           // IMPORTANT: Use longer timeout to ensure messages state is updated
-          const pagesToSave = evaluationMode === "bidder_evaluation" ? [] : finalPages
+          const pagesToSave = evaluationMode === "bidder_evaluation" ? [27] : finalPages
           setTimeout(() => {
             // saveCellData will use the current messages state which includes user message
             saveCellData(bidderName, pagesToSave)
@@ -633,8 +744,8 @@ function Bids4CockpitContent() {
         
         // Save after initialization even if RAG fails
         // Pass bidderName explicitly to ensure correct bidder_name is saved
-        // For bidder_evaluation, save empty array; for submitted_evidence, use current bookmarked pages
-        const pagesToSaveOnError = evaluationMode === "bidder_evaluation" ? [] : currentBookmarkedPages
+        // For bidder_evaluation, save page 27; for submitted_evidence, use current bookmarked pages
+        const pagesToSaveOnError = evaluationMode === "bidder_evaluation" ? [27] : currentBookmarkedPages
         setTimeout(() => {
           saveCellData(bidderName, pagesToSaveOnError)
         }, 500)
@@ -654,620 +765,63 @@ function Bids4CockpitContent() {
     }
   }
   
-  // Load cell data from JSON
+  // Load cell data from hardcoded defaults (no JSON fetching)
   const loadCellData = async (isInitialLoad: boolean = false) => {
     try {
-      const response = await fetch("/api/bid-evaluation")
-      if (response.ok) {
-        const data = await response.json()
+      // Use hardcoded default data based on current mode
+      const defaultData = getDefaultPartnerData(evaluationMode)
+      
+      // Update partnerData with default data
+      setPartnerData(defaultData)
+      
+      // Only update session state on initial load
+      if (isInitialLoad) {
+        setSelectedBidder("Abhiraj")
+        const defaultPage = evaluationMode === "bidder_evaluation" ? 27 : 111
+        setCurrentPdfPage(defaultPage)
+      }
+      
+      // Update cellData for selected bidder
+      if (selectedBidder !== "J.V." && defaultData[selectedBidder]) {
+        setCellData(defaultData[selectedBidder])
         
-        // Get mode-specific data
-        let modeData = data[evaluationMode]
-        
-        // If bidder_evaluation mode doesn't exist, create it from submitted_evidence with empty bookmarks
-        if (!modeData && evaluationMode === "bidder_evaluation" && data.submitted_evidence) {
-          modeData = {
-            ...data.submitted_evidence,
-            bookmarked_pages: [],
-            chat_messages: []
-          }
-          // Save the new mode structure
-          data[evaluationMode] = modeData
-          await fetch("/api/bid-evaluation", {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-          })
-        }
-        
-        // Fallback to submitted_evidence or root data
-        if (!modeData) {
-          modeData = data.submitted_evidence || data
-        }
-        
-        // Only update session state on initial load
-        if (isInitialLoad) {
-          if (modeData.current_selected_criteria) setSelectedCriteria(modeData.current_selected_criteria)
-          // Always default to first partner (Abhiraj) on initial load, ignore saved bidder
-          // This ensures consistent behavior - first partner always opens by default
-          setSelectedBidder("Abhiraj")
-          // Set default page for first partner if no saved page exists
-          // This will be overridden by first cell's page if cell data exists
-          if (!modeData.current_pdf_page) {
-            const defaultPage = evaluationMode === "bidder_evaluation" ? 27 : 111
-            setCurrentPdfPage(defaultPage)
-          } else {
-            setCurrentPdfPage(modeData.current_pdf_page)
-          }
-        }
-        
-        // Load data for ALL partners, not just selected bidder
-        if (modeData.criterias?.[selectedCriteria]?.metadata?.tables) {
-          const tables = modeData.criterias[selectedCriteria].metadata.tables
-          const partnersToLoad = ["Abhiraj", "Shraddha", "Shankar"]
-          
-          partnersToLoad.forEach(bidderName => {
-            const tableId = `table-${selectedCriteria}-${bidderName}`
-            const table = tables[tableId]
-            
-            if (table?.cells && Object.keys(table.cells).length > 0) {
-              const partnerCellData: Record<string, CellData> = {}
-              
-              Object.entries(table.cells).forEach(([cellKey, cell]: [string, any]) => {
-                // Get default page number for this partner
-                // For bidder_evaluation mode, always use page 27
-                const defaultPage = evaluationMode === "bidder_evaluation" 
-                  ? 27 
-                  : (bidderName === "Abhiraj" ? 111 : bidderName === "Shraddha" ? 336 : 808)
-                // Use cell.page_number if it exists, otherwise use default
-                // For bidder_evaluation, always force page 27
-                // For submitted_evidence, if page_number is 27 (incorrect), use the correct default
-                let pageNumber = evaluationMode === "bidder_evaluation" 
-                  ? 27 
-                  : (cell.page_number || defaultPage)
-                // Correct page 27 values in submitted_evidence mode to proper page numbers
-                if (evaluationMode === "submitted_evidence" && pageNumber === 27) {
-                  pageNumber = defaultPage
-                }
-                partnerCellData[cellKey] = {
-                  value: cell.value || "",
-                  page_number: pageNumber,
-                  metadata: {
-                    modified_by: cell.metadata?.modified_by || "AI",
-                    modified_at: cell.metadata?.modified_at || new Date().toISOString()
-                  }
-                }
-              })
-              
-              // Update partnerData for this partner
-              if (Object.keys(partnerCellData).length > 0) {
-                setPartnerData(prev => ({
-                  ...prev,
-                  [bidderName]: partnerCellData
-                }))
-                
-                // If this is the currently selected bidder, also update cellData
-                if (bidderName === selectedBidder && selectedBidder !== "J.V.") {
-                  setCellData(partnerCellData)
-                  
-                  // On initial load, set PDF to first cell's page so it doesn't look empty
-                  if (isInitialLoad && Object.keys(partnerCellData).length > 0) {
-                    // Get the first cell's page number (first year in TURNOVER_YEARS)
-                    const firstYear = "2019-20"
-                    const firstCellKey = `turnover-${firstYear}`
-                    const firstCell = partnerCellData[firstCellKey]
-                    if (firstCell && firstCell.page_number) {
-                      // Small delay to ensure PDF is loaded
-                      setTimeout(() => {
-                        setCurrentPdfPage(firstCell.page_number)
-                        setPdfViewMode("full")
-                      }, 500)
-                    } else {
-                      // If first cell doesn't exist, use default page for this partner
-                      const defaultPage = evaluationMode === "bidder_evaluation" 
-                        ? 27 
-                        : (bidderName === "Abhiraj" ? 111 : bidderName === "Shraddha" ? 336 : 808)
-                      setTimeout(() => {
-                        setCurrentPdfPage(defaultPage)
-                        setPdfViewMode("full")
-                      }, 500)
-                    }
-                  }
-                }
-              }
-            }
-            // If no saved data exists, partnerData will remain empty for that partner
-          })
-          
-          // Load J.V. multiplying factors
-          const jvTableId = `table-${selectedCriteria}-J.V.`
-          const jvTable = tables[jvTableId]
-          if (jvTable?.cells) {
-            setJvTableData(prev => {
-              const updated = { ...prev }
-              TURNOVER_YEARS.forEach(year => {
-                const factorKey = `multiplyingFactor-${year}`
-                const factorCell = jvTable.cells[factorKey]
-                if (factorCell && updated[year]) {
-                  updated[year] = {
-                    ...updated[year],
-                    multiplyingFactor: factorCell.value || updated[year].multiplyingFactor
-                  }
-                }
-              })
-              return updated
-            })
-          }
-        } else {
-          // Fallback to old validation structure for migration
-          const partnersToLoad = ["Abhiraj", "Shraddha", "Shankar"]
-          partnersToLoad.forEach(bidderName => {
-            const currentValidation = modeData.validations?.find(
-              (v: any) => v.criteria_key === selectedCriteria && 
-                          v.bidder_name === bidderName
-            )
-            
-            if (currentValidation && currentValidation.cell_data && Object.keys(currentValidation.cell_data).length > 0) {
-              const partnerCellData: Record<string, CellData> = {}
-              Object.entries(currentValidation.cell_data || {}).forEach(([key, cell]: [string, any]) => {
-                // Get default page number for this partner
-                // For bidder_evaluation mode, always use page 27
-                const defaultPage = evaluationMode === "bidder_evaluation" 
-                  ? 27 
-                  : (bidderName === "Abhiraj" ? 111 : bidderName === "Shraddha" ? 336 : 808)
-                // Use cell.page_number if it exists, otherwise use default
-                // For bidder_evaluation, always force page 27
-                // For submitted_evidence, if page_number is 27 (incorrect), use the correct default
-                let pageNumber = evaluationMode === "bidder_evaluation" 
-                  ? 27 
-                  : (cell.page_number || defaultPage)
-                // Correct page 27 values in submitted_evidence mode to proper page numbers
-                if (evaluationMode === "submitted_evidence" && pageNumber === 27) {
-                  pageNumber = defaultPage
-                }
-                partnerCellData[key] = {
-                  value: cell.value || "",
-                  page_number: pageNumber,
-                  metadata: {
-                    modified_by: cell.metadata?.modified_by || "AI",
-                    modified_at: cell.metadata?.modified_at || new Date().toISOString()
-                  }
-                }
-              })
-              
-              setPartnerData(prev => ({
-                ...prev,
-                [bidderName]: partnerCellData
-              }))
-              
-              if (bidderName === selectedBidder && selectedBidder !== "J.V.") {
-                setCellData(partnerCellData)
-              }
-            }
-            // If no saved data exists, partnerData will remain empty for that partner
-          })
-        }
-        
-        // Clear bookmarks first to prevent showing previous partner's bookmarks
-        setBookmarkedPages([])
-        
-        // Load bookmarked pages for current criteria and bidder
-        // For individual partners: only show their specific bookmarks
-        // For J.V.: show combined bookmarks from all partners
-        let criteriaBookmarks: any[] = []
-        // For bidder_evaluation mode, use empty bookmarks initially
-        if (evaluationMode === "bidder_evaluation") {
-          criteriaBookmarks = []
-        } else if (selectedBidder === "J.V.") {
-          // J.V. gets combined bookmarks from all partners
-          criteriaBookmarks = (modeData.bookmarked_pages || []).filter(
-            (bm: any) => {
-              if (bm.criteria_key !== selectedCriteria) return false
-              // Include all partner bookmarks (Abhiraj, Shraddha, Shankar) or J.V. specific
-              // Ignore old bookmarks without bidder_name
-              return bm.bidder_name === "J.V." || 
-                     bm.bidder_name === "Abhiraj" || 
-                     bm.bidder_name === "Shraddha" || 
-                     bm.bidder_name === "Shankar"
-            }
-          ) || []
-        } else {
-          // Individual partners: only their specific bookmarks
-          criteriaBookmarks = (modeData.bookmarked_pages || []).filter(
-            (bm: any) => {
-              if (bm.criteria_key !== selectedCriteria) return false
-              // Only show bookmarks for this specific partner (ignore old format)
-              return bm.bidder_name === selectedBidder
-            }
-          ) || []
-        }
-        // Remove duplicates and sort
-        const uniquePages = Array.from(new Set(criteriaBookmarks.map((bm: any) => bm.page_number))).sort((a, b) => a - b)
-            setBookmarkedPages(uniquePages)
-        
-        // If no bookmarks found, add required pages immediately (only for submitted_evidence mode)
-        if (uniquePages.length === 0 && evaluationMode === "submitted_evidence") {
-          const requiredPages = selectedBidder === "Abhiraj" ? [111] 
-                           : selectedBidder === "Shraddha" ? [336] 
-                           : selectedBidder === "Shankar" ? [808] 
-                           : selectedBidder === "J.V." ? [111, 336, 808] 
-                           : []
-          if (requiredPages.length > 0) {
-            setBookmarkedPages(requiredPages)
-          }
-        } else if (evaluationMode === "bidder_evaluation") {
-          // For bidder_evaluation mode, keep bookmarks empty initially
-          setBookmarkedPages([])
-        }
-        
-        // Load chat messages for current criteria and bidder
-        // Skip loading messages for J.V. - keep chat empty, but still add bookmarks
-        if (selectedBidder === "J.V.") {
-          setMessages([])
-          // J.V. bookmarks are already loaded above (uniquePages), so no need to add again
-          // The bookmarks should already include all partner pages from the filter above
-        } else {
-          // Only load messages that have bidder_name matching current bidder (ignore old format)
-          const criteriaMessages = (modeData.chat_messages || []).filter(
-            (msg: any) => {
-              if (msg.criteria_key !== selectedCriteria) return false
-              // Only show messages that have bidder_name matching current bidder
-              // Ignore old messages without bidder_name
-              const matchesBidder = msg.bidder_name === selectedBidder
-              
-              // Additional check: verify message content mentions the correct partner
-              // This is especially important for bidder_evaluation mode
-              if (matchesBidder && msg.content) {
-                const content = msg.content.toLowerCase()
-                if (selectedBidder === "Abhiraj" && !content.includes("abhiraj")) {
-                  return false
-                }
-                if (selectedBidder === "Shraddha" && !content.includes("shraddha")) {
-                  return false
-                }
-                if (selectedBidder === "Shankar" && !content.includes("shankar")) {
-                  return false
-                }
-              }
-              
-              return matchesBidder
-            }
-          ) || []
-          
-          console.log("🔍 Filtered messages for partner:", selectedBidder, "Mode:", evaluationMode, "Count:", criteriaMessages.length)
-          
-          // Check if messages exist and if they match the current mode
-          // Always reinitialize if mode doesn't match
-          const partnerKey = `${selectedCriteria}-${selectedBidder}-${evaluationMode}`
-          
-          if (criteriaMessages.length > 0) {
-            // Check if messages are from a different mode by checking message content
-            // Look for mode-specific keywords in the messages
-            const hasBidderEvaluationKeyword = criteriaMessages.some((msg: any) => 
-              msg.content && msg.content.includes("bidder evaluation sheet")
-            )
-            const hasSubmittedEvidenceKeyword = criteriaMessages.some((msg: any) => 
-              msg.content && msg.content.includes("certified by CA")
-            )
-            
-            // Determine if messages match current mode
-            const messagesMatchMode = 
-              (evaluationMode === "bidder_evaluation" && hasBidderEvaluationKeyword && !hasSubmittedEvidenceKeyword) ||
-              (evaluationMode === "submitted_evidence" && hasSubmittedEvidenceKeyword && !hasBidderEvaluationKeyword)
-            
-            if (!messagesMatchMode) {
-              // Messages exist but are from wrong mode - clear and re-initialize
-              console.log("🔄 Messages exist but are from different mode, re-initializing...", {
-                currentMode: evaluationMode,
-                hasBidderEvaluationKeyword,
-                hasSubmittedEvidenceKeyword
-              })
-              setMessages([])
-              setHasInitializedPartner(prev => ({ ...prev, [partnerKey]: false }))
-              // Initialize with new mode-specific prompt
-              setTimeout(() => {
-                initializePartnerData(selectedBidder)
-              }, 100)
-            } else {
-              // Messages are correct for this mode - load them
-              console.log("✅ Loading existing messages for mode:", evaluationMode, "Partner:", selectedBidder)
-              const loadedMessages = criteriaMessages.map((msg: any, idx: number) => ({
-                id: msg.message_id || `msg-${idx}`,
-                role: msg.role,
-                content: msg.content,
-                timestamp: new Date(msg.created_at || Date.now()),
-                searchResults: msg.searchResults || [],
-                isLoading: msg.isLoading || false
-              }))
-              
-              // Verify that loaded messages are for the correct partner
-              // Check if any message mentions a different partner
-              const messagesForCorrectPartner = loadedMessages.every((msg: any) => {
-                if (!msg.content) return true
-                const content = msg.content.toLowerCase()
-                // For user messages, check if they mention the correct partner
-                if (msg.role === "user") {
-                  if (selectedBidder === "Abhiraj") {
-                    // Must include "abhiraj" - "bidder evaluation sheet" alone is not enough
-                    return content.includes("abhiraj")
-                  }
-                  if (selectedBidder === "Shraddha") {
-                    // Must include "shraddha" - "bidder evaluation sheet" alone is not enough
-                    return content.includes("shraddha")
-                  }
-                  if (selectedBidder === "Shankar") {
-                    // Must include "shankar" - "bidder evaluation sheet" alone is not enough
-                    return content.includes("shankar")
-                  }
-                }
-                // For assistant messages, check if they mention wrong partners
-                if (msg.role === "assistant") {
-                  // If message mentions a different partner, it's wrong
-                  if (selectedBidder === "Abhiraj" && (content.includes("shraddha") || content.includes("shankar"))) {
-                    return false
-                  }
-                  if (selectedBidder === "Shraddha" && (content.includes("abhiraj") || content.includes("shankar"))) {
-                    return false
-                  }
-                  if (selectedBidder === "Shankar" && (content.includes("abhiraj") || content.includes("shraddha"))) {
-                    return false
-                  }
-                }
-                return true
-              })
-              
-              // Check if user message exists - if not, we need to initialize
-              const hasUserMessage = loadedMessages.some((msg: Message) => msg.role === "user")
-              
-              if (!hasUserMessage || !messagesForCorrectPartner) {
-                console.log("⚠️ Messages don't match partner or missing user message, re-initializing...", {
-                  hasUserMessage,
-                  messagesForCorrectPartner,
-                  selectedBidder,
-                  loadedMessagesCount: loadedMessages.length
-                })
-                setMessages([])
-                setHasInitializedPartner(prev => ({ ...prev, [partnerKey]: false }))
-                // Initialize with new mode-specific prompt
-                setTimeout(() => {
-                  initializePartnerData(selectedBidder)
-                }, 100)
-              } else {
-                console.log("✅ Loading messages for partner:", selectedBidder, "Count:", loadedMessages.length)
-                setMessages(loadedMessages)
-                // Mark as initialized to prevent duplicate initialization
-                setHasInitializedPartner(prev => ({ ...prev, [partnerKey]: true }))
-              }
-            }
-          } else {
-            // No messages found - always initialize
-            console.log("🆕 No messages found, initializing for mode:", evaluationMode)
-            setHasInitializedPartner(prev => ({ ...prev, [partnerKey]: false }))
-            // Initialize immediately - add required pages first, then RAG
-            initializePartnerData(selectedBidder)
+        // On initial load, set PDF to first cell's page
+        if (isInitialLoad && Object.keys(defaultData[selectedBidder]).length > 0) {
+          const firstYear = "2019-20"
+          const firstCellKey = `turnover-${firstYear}`
+          const firstCell = defaultData[selectedBidder][firstCellKey]
+          if (firstCell && firstCell.page_number) {
+            setTimeout(() => {
+              setCurrentPdfPage(firstCell.page_number)
+              setPdfViewMode("full")
+            }, 500)
           }
         }
       }
+      
+      // Set bookmarks based on mode
+      // For bidder_evaluation mode, always bookmark page 27 for all JV members
+      if (evaluationMode === "bidder_evaluation") {
+        setBookmarkedPages([27])
+      } else {
+        // For submitted_evidence mode, clear bookmarks (will be set by initializePartnerData)
+        setBookmarkedPages([])
+      }
+      
+      // Clear messages (no saved messages in hardcoded mode)
+      setMessages([])
+      
+      // Return early - no JSON fetching needed
     } catch (error) {
       console.error("Error loading cell data:", error)
     }
   }
   
-  // Save cell data to JSON - saves ALL partner data, not just current bidder
+  // Save cell data to JSON - DISABLED (using hardcoded data only)
   const saveCellData = async (bidderNameOverride?: string, bookmarkedPagesOverride?: number[]) => {
-    try {
-      // Use override if provided, otherwise use selectedBidder from state
-      const bidderToSave = bidderNameOverride || selectedBidder
-      
-      // Fetch current data
-      const response = await fetch("/api/bid-evaluation")
-      const allData = await response.ok ? await response.json() : {}
-      
-      // Get or create mode-specific data structure
-      if (!allData[evaluationMode]) {
-        allData[evaluationMode] = {
-          bid_id: allData.bid_id || bid?.bid_id || "",
-          tender_id: allData.tender_id || tender?.tender_id || "",
-          current_selected_criteria: selectedCriteria,
-          current_selected_bidder: selectedBidder,
-          current_pdf_page: currentPdfPage,
-          criterias: {},
-          bookmarked_pages: [],
-          chat_messages: []
-        }
-      }
-      
-      const currentData = allData[evaluationMode]
-      
-      // Prepare new structure: criterias -> metadata -> tables -> cells
-      const criterias = currentData.criterias || {}
-      if (!criterias[selectedCriteria]) {
-        criterias[selectedCriteria] = {
-          metadata: {
-            tables: {}
-          }
-        }
-      }
-      
-      if (!criterias[selectedCriteria].metadata.tables) {
-        criterias[selectedCriteria].metadata.tables = {}
-      }
-      
-      // Save data for ALL partners (Abhiraj, Shraddha, Shankar)
-      const partnersToSave = ["Abhiraj", "Shraddha", "Shankar"]
-      partnersToSave.forEach(bidderName => {
-        const tableId = `table-${selectedCriteria}-${bidderName}`
-        if (!criterias[selectedCriteria].metadata.tables[tableId]) {
-          criterias[selectedCriteria].metadata.tables[tableId] = {
-            cells: {}
-          }
-        }
-        
-        // Get partner data - use current cellData if it's the selected bidder, otherwise use partnerData
-        const dataToSave = bidderName === selectedBidder 
-          ? cellData 
-          : partnerData[bidderName] || {}
-        
-        // Update cells for this partner
-        // For bidder_evaluation mode, always force page 27
-        // For submitted_evidence mode, use correct page numbers (111, 336, 808)
-        Object.entries(dataToSave).forEach(([cellKey, cell]) => {
-          let pageNumber: number
-          if (evaluationMode === "bidder_evaluation") {
-            pageNumber = 27
-          } else {
-            // For submitted_evidence, use correct default if page_number is 27 or missing
-            const defaultPage = bidderName === "Abhiraj" ? 111 : bidderName === "Shraddha" ? 336 : 808
-            pageNumber = (cell.page_number && cell.page_number !== 27) ? cell.page_number : defaultPage
-          }
-          criterias[selectedCriteria].metadata.tables[tableId].cells[cellKey] = {
-            value: cell.value,
-            page_number: pageNumber,
-            metadata: {
-              modified_by: cell.metadata.modified_by,
-              modified_at: cell.metadata.modified_at || new Date().toISOString()
-            }
-          }
-        })
-      })
-      
-      // Also save J.V. table data (multiplying factors)
-      const jvTableId = `table-${selectedCriteria}-J.V.`
-      if (!criterias[selectedCriteria].metadata.tables[jvTableId]) {
-        criterias[selectedCriteria].metadata.tables[jvTableId] = {
-          cells: {}
-        }
-      }
-      
-      // Save multiplying factors for each year - use current jvTableData state
-      TURNOVER_YEARS.forEach(year => {
-        const yearData = jvTableData[year]
-        if (yearData) {
-          // Get existing factor to preserve metadata if it exists
-          const existingFactor = criterias[selectedCriteria]?.metadata?.tables?.[jvTableId]?.cells?.[`multiplyingFactor-${year}`]
-          
-          // If value changed, mark as user-modified, otherwise preserve existing metadata
-          const valueChanged = existingFactor?.value !== yearData.multiplyingFactor
-          const modifiedBy = valueChanged ? "user" : (existingFactor?.metadata?.modified_by || "AI")
-          const modifiedAt = valueChanged ? new Date().toISOString() : (existingFactor?.metadata?.modified_at || new Date().toISOString())
-          
-          // For bidder_evaluation mode, always use page 27
-          const pageNumber = evaluationMode === "bidder_evaluation" ? 27 : (yearData.pageNumber || 111)
-          criterias[selectedCriteria].metadata.tables[jvTableId].cells[`multiplyingFactor-${year}`] = {
-            value: yearData.multiplyingFactor,
-            page_number: pageNumber,
-            metadata: {
-              modified_by: modifiedBy,
-              modified_at: modifiedAt
-            }
-          }
-        }
-      })
-      
-      // Update bookmarked pages for current criteria and bidder
-      // Only save bookmarks that belong to this specific bidder
-      // bookmarkedPages should already be filtered to only contain this bidder's pages (cleared in loadCellData)
-      // For bidder_evaluation mode, start with empty bookmarks
-      const existingBookmarkedPages = evaluationMode === "bidder_evaluation" ? [] : (currentData.bookmarked_pages || [])
-      const criteriaBookmarks = existingBookmarkedPages.filter(
-        (bm: any) => !(bm.criteria_key === selectedCriteria && bm.bidder_name === bidderToSave)
-      )
-      
-      // Use override if provided, otherwise use state
-      // bookmarkedPages is cleared when switching partners, so it only contains current partner's pages
-      const pagesToSave = bookmarkedPagesOverride || bookmarkedPages
-      pagesToSave.forEach(pageNum => {
-        criteriaBookmarks.push({
-          bookmark_id: `bm-${selectedCriteria}-${bidderToSave}-${pageNum}`,
-          bid_evaluation_id: bid?.bid_id || "eval-001",
-          criteria_key: selectedCriteria,
-          bidder_name: bidderToSave,
-          page_number: pageNum,
-          created_at: new Date().toISOString()
-        })
-      })
-      
-      // Update chat messages for current criteria and bidder
-      // Only save messages if they match the current bidder (prevent cross-contamination)
-      const chatMessages = currentData.chat_messages || []
-      const otherCriteriaMessages = chatMessages.filter(
-        (msg: any) => !(msg.criteria_key === selectedCriteria && msg.bidder_name === bidderToSave)
-      )
-      
-      // Only save messages if they are for the correct bidder
-      // Check message content to ensure it matches the bidder name
-      // IMPORTANT: Don't filter out user messages - they are the initial queries
-      const validMessages = messages.filter((msg: Message) => {
-        // Always include user messages (they are the queries)
-        if (msg.role === "user") {
-          return true
-        }
-        
-        const content = msg.content || ""
-        // Skip if message content mentions a different partner (only for assistant messages)
-        if (bidderToSave === "Abhiraj" && (content.includes("Shraddha") || content.includes("Shankar") || content.includes("Joint Venture"))) {
-          return false
-        }
-        if (bidderToSave === "Shraddha" && (content.includes("Abhiraj") || content.includes("Shankar") || content.includes("Joint Venture"))) {
-          return false
-        }
-        if (bidderToSave === "Shankar" && (content.includes("Abhiraj") || content.includes("Shraddha") || content.includes("Joint Venture"))) {
-          return false
-        }
-        if (bidderToSave === "J.V." && messages.length > 0) {
-          // Don't save any messages for J.V.
-          return false
-        }
-        return true
-      })
-      
-      console.log("💾 Saving messages:", validMessages.map(m => ({ role: m.role, content: m.content.substring(0, 50) })))
-      
-      validMessages.forEach((msg, idx) => {
-        otherCriteriaMessages.push({
-          message_id: msg.id || `msg-${selectedCriteria}-${bidderToSave}-${idx}`,
-          role: msg.role,
-          content: msg.content,
-          criteria_key: selectedCriteria,
-          bidder_name: bidderToSave,
-          created_at: msg.timestamp?.toISOString() || new Date().toISOString(),
-          searchResults: msg.searchResults || [],
-          isLoading: msg.isLoading || false
-        })
-      })
-      
-      console.log("💾 Saving messages to JSON:", validMessages.map(m => ({ role: m.role, content: m.content.substring(0, 60) })))
-      
-      // Prepare updated data for this mode
-      const updatedModeData = {
-        ...currentData,
-        bid_id: bid?.bid_id || currentData.bid_id,
-        tender_id: tender?.tender_id || currentData.tender_id,
-        current_selected_criteria: selectedCriteria,
-        current_selected_bidder: selectedBidder,
-        current_pdf_page: currentPdfPage,
-        criterias,
-        bookmarked_pages: criteriaBookmarks,
-        chat_messages: otherCriteriaMessages,
-        updated_at: new Date().toISOString()
-      }
-      
-      // Update the mode-specific section in allData
-      allData[evaluationMode] = updatedModeData
-      
-      // Preserve bid_id and tender_id at root level
-      allData.bid_id = bid?.bid_id || allData.bid_id || ""
-      allData.tender_id = tender?.tender_id || allData.tender_id || ""
-      
-      // Save to API - save entire structure with both modes
-      await fetch("/api/bid-evaluation", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(allData)
-      })
-    } catch (error) {
-      console.error("Error saving cell data:", error)
-    }
+    // Save mechanism removed - data is now hardcoded
+    // This function is kept for compatibility but does nothing
+    return
   }
   
   const fetchBidData = async () => {
@@ -1297,19 +851,19 @@ function Bids4CockpitContent() {
         if (bidData.tender_id) {
           // Use mock tender data
           const tenderData = mockTender
-          setTender(tenderData)
-          
-          const criteriaJson = JSON.parse(tenderData.evaluation_criteria_json || "{}")
-          setCriteria(criteriaJson)
-          setLoadingSteps(prev => ({ ...prev, "Fetching evaluation criteria": true }))
-          
-          // Set first criteria as selected
-          const firstKey = Object.keys(criteriaJson).sort((a, b) => {
-            const numA = parseInt(a) || 0
-            const numB = parseInt(b) || 0
-            return numA - numB
-          })[0]
-          if (firstKey) setSelectedCriteria(firstKey)
+            setTender(tenderData)
+            
+            const criteriaJson = JSON.parse(tenderData.evaluation_criteria_json || "{}")
+            setCriteria(criteriaJson)
+            setLoadingSteps(prev => ({ ...prev, "Fetching evaluation criteria": true }))
+            
+            // Set first criteria as selected
+            const firstKey = Object.keys(criteriaJson).sort((a, b) => {
+              const numA = parseInt(a) || 0
+              const numB = parseInt(b) || 0
+              return numA - numB
+            })[0]
+            if (firstKey) setSelectedCriteria(firstKey)
         }
         
         // Step 3: Initializing partner data
@@ -1507,10 +1061,10 @@ function Bids4CockpitContent() {
       const data = mockSearchResults
 
       let results: SearchResult[] = []
-      results = (data.results || []).map((r: any) => ({
-        ...r,
-        document_name: bid?.bid_name || "Bid Document",
-      }))
+        results = (data.results || []).map((r: any) => ({
+          ...r,
+          document_name: bid?.bid_name || "Bid Document",
+        }))
 
       // Update message with RAG results
       setMessages(prev => prev.map(msg =>

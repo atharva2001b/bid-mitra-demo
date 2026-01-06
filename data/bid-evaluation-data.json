@@ -1917,7 +1917,7 @@
     }
   ],
   "created_at": "2025-11-17T14:56:23.297Z",
-  "updated_at": "2025-12-01T03:37:07.336Z",
+  "updated_at": "2026-01-06T10:17:00.300Z",
   "bidder_evaluation": {
     "bid_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
     "tender_id": "2581f451-0aca-4562-a8e9-a15791f5439d",
@@ -1931,7 +1931,7 @@
             "table-1-Abhiraj": {
               "cells": {
                 "turnover-2019-20": {
-                  "value": "3110.00",
+                  "value": "889.43",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -1939,7 +1939,7 @@
                   }
                 },
                 "turnover-2020-21": {
-                  "value": "2668.86",
+                  "value": "1341.21",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -1947,7 +1947,7 @@
                   }
                 },
                 "turnover-2021-22": {
-                  "value": "3491.45",
+                  "value": "2047.84",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -1955,7 +1955,7 @@
                   }
                 },
                 "turnover-2022-23": {
-                  "value": "4025.35",
+                  "value": "1818.74",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -1963,7 +1963,7 @@
                   }
                 },
                 "turnover-2023-24": {
-                  "value": "7520.72",
+                  "value": "1600.00",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -1975,7 +1975,7 @@
             "table-1-Shraddha": {
               "cells": {
                 "turnover-2019-20": {
-                  "value": "3110.00",
+                  "value": "889.43",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -1983,7 +1983,7 @@
                   }
                 },
                 "turnover-2020-21": {
-                  "value": "2668.86",
+                  "value": "1341.21",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -1991,7 +1991,7 @@
                   }
                 },
                 "turnover-2021-22": {
-                  "value": "3491.45",
+                  "value": "2047.84",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -1999,7 +1999,7 @@
                   }
                 },
                 "turnover-2022-23": {
-                  "value": "4025.35",
+                  "value": "1818.74",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -2007,7 +2007,7 @@
                   }
                 },
                 "turnover-2023-24": {
-                  "value": "7520.72",
+                  "value": "1600.00",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -2019,7 +2019,7 @@
             "table-1-Shankar": {
               "cells": {
                 "turnover-2019-20": {
-                  "value": "3110.00",
+                  "value": "889.43",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -2027,7 +2027,7 @@
                   }
                 },
                 "turnover-2020-21": {
-                  "value": "2668.86",
+                  "value": "1341.21",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -2035,7 +2035,7 @@
                   }
                 },
                 "turnover-2021-22": {
-                  "value": "3491.45",
+                  "value": "2047.84",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -2043,7 +2043,7 @@
                   }
                 },
                 "turnover-2022-23": {
-                  "value": "4025.35",
+                  "value": "1818.74",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -2051,7 +2051,7 @@
                   }
                 },
                 "turnover-2023-24": {
-                  "value": "7520.72",
+                  "value": "1600.00",
                   "page_number": 27,
                   "metadata": {
                     "modified_by": "AI",
@@ -2111,37 +2111,37 @@
     "bookmarked_pages": [],
     "chat_messages": [
       {
-        "message_id": "user-1764560179750",
+        "message_id": "user-1767694603449",
+        "role": "user",
+        "content": "Annual turnover submitted by bidder evaluation sheet for Shraddha.",
+        "criteria_key": "1",
+        "bidder_name": "Abhiraj",
+        "created_at": "2026-01-06T10:16:43.449Z",
+        "searchResults": [],
+        "isLoading": false
+      },
+      {
+        "message_id": "user-1767694614073",
         "role": "user",
         "content": "Annual turnover submitted by bidder evaluation sheet for Abhiraj.",
         "criteria_key": "1",
         "bidder_name": "Shraddha",
-        "created_at": "2025-12-01T03:36:19.750Z",
+        "created_at": "2026-01-06T10:16:54.073Z",
         "searchResults": [],
         "isLoading": false
       },
       {
-        "message_id": "user-1764560225695",
+        "message_id": "user-1767694618380",
         "role": "user",
         "content": "Annual turnover submitted by bidder evaluation sheet for Shraddha.",
         "criteria_key": "1",
         "bidder_name": "Shankar",
-        "created_at": "2025-12-01T03:37:05.695Z",
+        "created_at": "2026-01-06T10:16:58.380Z",
         "searchResults": [],
         "isLoading": false
-      },
-      {
-        "message_id": "loading-1764560225695",
-        "role": "assistant",
-        "content": "Searching for bidder evaluation sheet information...",
-        "criteria_key": "1",
-        "bidder_name": "Shankar",
-        "created_at": "2025-12-01T03:37:05.695Z",
-        "searchResults": [],
-        "isLoading": true
       }
     ],
-    "updated_at": "2025-12-01T03:37:07.327Z"
+    "updated_at": "2026-01-06T10:17:00.291Z"
   },
   "submitted_evidence": {
     "bid_id": "f33817e8-a075-4547-8193-e63a2de6d04e",
@@ -2156,7 +2156,7 @@
             "table-1-Abhiraj": {
               "cells": {
                 "turnover-2019-20": {
-                  "value": "3110.00",
+                  "value": "2343.24",
                   "page_number": 111,
                   "metadata": {
                     "modified_by": "AI",
@@ -2164,7 +2164,7 @@
                   }
                 },
                 "turnover-2020-21": {
-                  "value": "2668.86",
+                  "value": "5956.07",
                   "page_number": 111,
                   "metadata": {
                     "modified_by": "AI",
@@ -2172,7 +2172,7 @@
                   }
                 },
                 "turnover-2021-22": {
-                  "value": "3491.45",
+                  "value": "1165.00",
                   "page_number": 111,
                   "metadata": {
                     "modified_by": "AI",
@@ -2180,7 +2180,7 @@
                   }
                 },
                 "turnover-2022-23": {
-                  "value": "4025.35",
+                  "value": "3814.51",
                   "page_number": 111,
                   "metadata": {
                     "modified_by": "AI",
@@ -2188,7 +2188,7 @@
                   }
                 },
                 "turnover-2023-24": {
-                  "value": "7520.72",
+                  "value": "9084.83",
                   "page_number": 111,
                   "metadata": {
                     "modified_by": "AI",
@@ -2244,7 +2244,7 @@
             "table-1-Shankar": {
               "cells": {
                 "turnover-2019-20": {
-                  "value": "3110.00",
+                  "value": "889.43",
                   "page_number": 808,
                   "metadata": {
                     "modified_by": "AI",
@@ -2252,7 +2252,7 @@
                   }
                 },
                 "turnover-2020-21": {
-                  "value": "2668.86",
+                  "value": "1341.21",
                   "page_number": 808,
                   "metadata": {
                     "modified_by": "AI",
@@ -2260,7 +2260,7 @@
                   }
                 },
                 "turnover-2021-22": {
-                  "value": "3491.45",
+                  "value": "2047.84",
                   "page_number": 808,
                   "metadata": {
                     "modified_by": "AI",
@@ -2268,7 +2268,7 @@
                   }
                 },
                 "turnover-2022-23": {
-                  "value": "4025.35",
+                  "value": "1818.74",
                   "page_number": 808,
                   "metadata": {
                     "modified_by": "AI",
@@ -2276,7 +2276,7 @@
                   }
                 },
                 "turnover-2023-24": {
-                  "value": "7520.72",
+                  "value": "1600.00",
                   "page_number": 808,
                   "metadata": {
                     "modified_by": "AI",

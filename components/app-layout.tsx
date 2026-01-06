@@ -4,7 +4,7 @@ import { Loader2 } from "lucide-react"
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="hidden md:flex h-screen overflow-hidden">
       <Suspense fallback={
         <div className="w-64 border-r bg-sidebar flex items-center justify-center">
           <Loader2 className="h-6 w-6 animate-spin" />
