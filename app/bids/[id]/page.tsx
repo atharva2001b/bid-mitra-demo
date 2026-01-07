@@ -2459,8 +2459,9 @@ function Bids4CockpitContent() {
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
                             <strong className="font-semibold text-green-900">AI Insights</strong>
-                            <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded-full">
-                              {evaluationMode === "bidder_evaluation" ? "92.5% Accuracy" : "98.2% Accuracy"}
+                            <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded-full flex items-center gap-1">
+                              <CheckCircle2 className="h-3 w-3" />
+                              Compliant
                             </span>
                           </div>
                           <div className="text-xs text-slate-700 leading-relaxed space-y-1.5">
